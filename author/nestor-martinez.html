@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="spanish">
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>Portafolio Machine Learning - Néstor Martínez</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Portafolio Machine Learning</a></h1>
+                <nav><ul>
+                    <li><a href="/category/texto-de-estudio.html">Texto de Estudio</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/introduccion-a-machine-learning.html">Introducción a Machine Learning</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2023-08-22T18:00:00+02:00">
+                Published: mar. 22 Agosto 2023
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/nestor-martinez.html">Néstor Martínez</a>
+        </address>
+<p>In <a href="/category/texto-de-estudio.html">Texto de Estudio</a>.</p>
+
+</footer><!-- /.post-info --><h1>Prefacio</h1>
+<p>En este documento indagaremos un poco acerca de:</p>
+<ol>
+<li>¿Qué es Machine Learning?</li>
+<li>Plataformas y herramientas existentes para la aplicación de Machine Learning</li>
+<li>¿Qué es CRISP-DM?</li>
+<li>Tipos de Algoritmos y las herramientas que los soportan</li>
+<li>Búsqueda de un set de datos interesante del Repositorio de Machine Learning de UC Irvine y lo analizaremos un poco</li>
+</ol>
+<h1>¿Qué es Machine Learning?</h1>
+<p>Analizaremos el significado de Machine Learning en base a distintas fuentes:</p>
+<h3>Cambridge University</h3>
+<p>The process of computers changing the way they carry out tasks by learning from new data, without a human being needing to give instructions in the form of a program</p>
+<h3>IBM</h3>
+<p>Machine learning is a branch of artificial intelligence (AI) and computer science which focuses on the use of data and algorithms to imitate the way that humans learn, gradually improving its accuracy</p>
+<h3>Google</h3>
+<p>El aprendizaje automático es un subconjunto de inteligencia artificial que permite que un sistema aprenda y mejore de forma autónoma mediante redes neuronales y aprendizaje profundo, sin tener que ser programado explícitamente, a través de la ingesta de grandes cantidades de datos.</p>
+<h2>¿En qué se aplica?</h2>
+<ul>
+<li>Sistemas de Recomendación</li>
+<li>Motores de Búsqueda</li>
+<li>Asistentes Digitales</li>
+<li>Vehículos Autónomos</li>
+</ul>
+<p>Sacado de: <a href="https://www.simplilearn.com/data-mining-vs-machine-learning-article">https://www.simplilearn.com/data-mining-vs-machine-learning-article</a></p>
+<h2>¿Qué tiene en común y en qué se diferencia de “Inteligencia Artificial”?</h2>
+<p>Machine Learning es un subconjunto dentro de la Inteligencia Artificial, ya que no todas las actividades de Inteligencia Artificial son Machine Learning, pero Machine Learning es en su totalidad Inteligencia Artificial. Sacado de: <a href="https://aws.amazon.com/es/compare/the-difference-between-artificial-intelligence-and-machine-learning/">https://aws.amazon.com/es/compare/the-difference-between-artificial-intelligence-and-machine-learning/</a></p>
+<h2>¿Qué tiene en común y en qué se diferencia de “Análisis Estadístico”?</h2>
+<p>La diferencia es en la utilidad que tiene cada una. El análisis estadístico construye modelos que permiten explicar relaciones entre variables, mientras que Machine Learning puede construir modelos para predecir el futuro sin programación explícita. Sacado de: <a href="https://www.coursera.org/mx/articles/statistical-modeling">https://www.coursera.org/mx/articles/statistical-modeling</a></p>
+<h2>¿Cómo se diferencia con Data Mining?</h2>
+<p>La diferencia existe en la utilidad que tiene cada una. Data Mining está diseñado para extraer información importante de una cantidad vasta de información, mientras que Machine Learning entrena un sistema usando datos extraidos para realizar tareas complejas. Sacado de: <a href="https://www.simplilearn.com/data-mining-vs-machine-learning-article">https://www.simplilearn.com/data-mining-vs-machine-learning-article</a></p>
+<h1>Plataformas y herramientas existentes para la aplicación de Machine Learning</h1>
+<h2>RapidMiner</h2>
+<p>Sacado de: <a href="https://www.researchgate.net/figure/Features-Advantages-Disadvantages-of-RapidMiner78_fig2_322628934">https://www.researchgate.net/figure/Features-Advantages-Disadvantages-of-RapidMiner78_fig2_322628934</a></p>
+<h3>Flexibilidad</h3>
+<h3>Múltiples métodos de integración, transformación, análisis, modelado y visualización de Datos.</h3>
+<h3>Numerosos procedimientos en el área de detección de outliers y selección de atributos</h3>
+<h2>IBM Watson</h2>
+<p>Sacado de: <a href="https://www.ibm.com/products/watson-discovery">https://www.ibm.com/products/watson-discovery</a></p>
+<h3>Comprensión de la estructura de tus documentos</h3>
+<h3>Conversión de imágenes de texto a algo más comprensible</h3>
+<h3>Navegar a través de tu información para descubrir detalles importantes</h3>
+<h3>Implementación de Natural Language Processing</h3>
+<h3>Herramientas User Friendly</h3>
+<h2>AWS Machine Learning</h2>
+<p>Sacado de: <a href="https://builtin.com/machine-learning/machine-learning-tools">https://builtin.com/machine-learning/machine-learning-tools</a></p>
+<h3>Amazon Rekognition</h3>
+<p>Identifica objetos, personas, texto y actividades en videos e imágenes.</p>
+<h3>Amazon SageMaker</h3>
+<p>Ayuda al entrenamiento y deployment de modelos de ML.</p>
+<h1>¿Qué es CRISP-DM?</h1>
+<h2>CRISP-DM</h2>
+<p>CRISP-DM, o Cross Industry Standard Process for Data Mining, es un modelo de proceso de Data Mining. Describe las fases del <strong>ciclo de vida</strong> de Data Mining, conjunto con las tareas necesarias para cada fase y las relaciones entre fases.$^1$ Cabe destacar, que aunque desarrolle las tareas, no desarrolla cómo realizarlas.$^2$</p>
+<p><img alt="Untitled" src="images/UT1_PD1/Untitled.png"></p>
+<h3>Ciclo de Vida</h3>
+<p>Contiene seis fases con flechas para representar las dependencias entre fases, permitiendo la capacidad de volver hacia atras entre fases si lo fuese necesario. Las fases son:</p>
+<ul>
+<li>Comprensión del Negocio/Business Understanding</li>
+<li>Comprensión de los Datos/Data Understanding</li>
+<li>Preparación de los Datos/Data Preparation</li>
+<li>Modelado/Modeling</li>
+<li>Evaluation/Evaluación</li>
+<li>Deployment/Implementación</li>
+</ul>
+<h2>Procesos Similares</h2>
+<h3>SEMMA</h3>
+<p>Es una metodología que se define como “el proceso de selección, exploración y modelado de grandes volúmenes de datos para descubrir patrones de negocios desconocidos”$^3$ creado por el Instituto SAS. Fue creado para trabajarse con el software de su creador en mente, organizando nodos según las fases que componen la metodología. Tiene la ventaja de que “el usuario podría hacer uso del mismo siguiendo cualquier otra metodología de minería de datos”$^4$. Lo cual permite que uno pueda usar metodologías como CRISP-DM dentro de SEMMA.</p>
+<hr>
+<ol>
+<li><em>Conceptos básicos de ayuda de CRISP-DM</em>. Conceptos Básicos de Ayuda de Crisp-DM. (n.d.). https://www.ibm.com/docs/es/spss-modeler/saas?topic=dm-crisp-help-overview </li>
+<li>Moine, J. M., Haedo, A. S., &amp; Gordillo, S. E. (2012, August 23). <em>Estudio Comparativo de Metodologías Para Minería de Datos</em>. SEDICI. http://sedici.unlp.edu.ar/handle/10915/20034 </li>
+<li>IDEM</li>
+<li>IDEM</li>
+</ol>
+<h1>Tipos de Algoritmos y las herramientas que los soportan</h1>
+<h2>Rapidminer</h2>
+<h3>Clustering/Análisis de Grupos:</h3>
+<ul>
+<li>k means - si - add_cluster_attribute, add_as_label, k, etc</li>
+<li>k modes - no</li>
+<li>gaussian mixture model - si, con extension smile</li>
+<li>dbscan - si - epsilon, minimal_points</li>
+<li>Hierarchical - si - hierarchy, use_local_random_seed, local_random_seed</li>
+</ul>
+<h3>Dimension Reduction/Reducción de Dimensionalidad</h3>
+<ul>
+<li>Latent Dirichlet Analysis - No</li>
+<li>Singular Value Decomposition - Si - dimensionality_reduction, percentage_threshold, dimensions</li>
+<li>Principal Component Analysis - Si - dimensionality_reduction, variance_threshold, number_of_components</li>
+</ul>
+<h3>Classification &amp; Regression/Clasificación &amp; Regresión:</h3>
+<ul>
+<li>Kernel SVM - Si - kernel_type, kernel_gamma, kernel_sigma1, etc</li>
+<li>Linear SVM - No</li>
+<li>Random Forest - Si - minimal_size_for_split, minimal_leaf_size ,minimal_gain, etc</li>
+<li>Neural Network - Si - hidden_layers, training_cycles, learning_rate, etc</li>
+<li>Gradient Boosting Trees - Si - number_of_trees, reproducible, maximum_number_of_threads, etc</li>
+<li>Decision Tree - Si - criterion, minimal_size_for_split, minimal_leaf_size, etc</li>
+<li>Logistic Regression - Si - kernel_type, kernel_gamma, kernel_sigma1, etc</li>
+<li>Naive Bayes - Si - laplace_correction</li>
+</ul>
+<h2>IBM Watson Studio</h2>
+<h3>Clustering/Análisis de Grupos:</h3>
+<ul>
+<li>k means- si</li>
+<li>k modes - no</li>
+<li>Hierarchical - No</li>
+<li>Gaussian mixture model - Si</li>
+<li>dbscan - no</li>
+</ul>
+<h3>Dimension Reduction/Reducción de Dimensionalidad</h3>
+<ul>
+<li>Latent Dirichlet Analysis - No</li>
+<li>Singular Value Decomposition - Si</li>
+<li>Principal Component Analysis - Si</li>
+</ul>
+<h3>Classification &amp; Regression/Clasificación &amp; Regresión:</h3>
+<ul>
+<li>Kernel SVM - No</li>
+<li>Linear SVM - No</li>
+<li>Random Forest - Si</li>
+<li>Neural Network - Si</li>
+<li>Gradient Boosting Tree - No</li>
+<li>Decision Tree - Si</li>
+<li>Logistic Regression - Si</li>
+<li>Naive Bayes  - Si</li>
+</ul>
+<h1>Set de datos peculiar de UC Irvine</h1>
+<h2>Car Evaluation</h2>
+<h3>Problema que Abordan</h3>
+<p>Análisis de autos al relacionarlos con atributos de entrada y conceptos más complejos</p>
+<h3>Atributos</h3>
+<p><img alt="Untitled" src="images/UT1_PD1/Untitled_1.png"></p>
+<ul>
+<li>buying:   vhigh, high, med, low.</li>
+<li>maint:    vhigh, high, med, low.</li>
+<li>doors:    2, 3, 4, 5more.</li>
+<li>persons:  2, 4, more.</li>
+<li>lug_boot: small, med, big.</li>
+<li>safety:   low, med, high.</li>
+</ul>
+<h3>Tipo de algoritmo de ML</h3>
+<p>Algoritmos de Clasificación</p>                </article>
+            </aside><!-- /#featured -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="https://getpelican.com/">Pelican</a></li>
+                            <li><a href="https://www.python.org/">Python.org</a></li>
+                            <li><a href="https://palletsprojects.com/p/jinja/">Jinja2</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="https://www.linkedin.com/in/néstor-martínez-759122232/">LinkedIn</a></li>
+                            <li><a href="nestor.marvi@gmail.com">Mail de contacto</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a href="https://www.python.org/">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
