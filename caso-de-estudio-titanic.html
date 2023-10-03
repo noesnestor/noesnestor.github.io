@@ -1,0 +1,1167 @@
+
+<!DOCTYPE html>
+<html lang="spanish">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="/theme/pygments/github.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+
+
+  <link rel="shortcut icon" href="/images/coding.png" type="image/x-icon">
+  <link rel="icon" href="/images/coding.png" type="image/x-icon">
+
+
+
+
+
+ 
+
+<meta name="author" content="Néstor Martínez" />
+<meta name="description" content="Introducción En este caso de estudio utilizaremos la rama de Machine Learning para predecir nuestras capacidades para sobrevivir si estuviésemos en el Titanic, creando un Modelo de predicción automático en Python. Para esto, haremos uso de librerías de Python que nos ayudarán a la hora de manejar los datos y …" />
+<meta name="keywords" content="">
+
+
+  <meta property="og:site_name" content="Portafolio Machine Learning"/>
+  <meta property="og:title" content="Caso de Estudio Titanic"/>
+  <meta property="og:description" content="Introducción En este caso de estudio utilizaremos la rama de Machine Learning para predecir nuestras capacidades para sobrevivir si estuviésemos en el Titanic, creando un Modelo de predicción automático en Python. Para esto, haremos uso de librerías de Python que nos ayudarán a la hora de manejar los datos y …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="/caso-de-estudio-titanic.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2023-10-02 23:00:00-03:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="/author/nestor-martinez.html">
+  <meta property="article:section" content="Caso de Estudio"/>
+  <meta property="og:image" content="/images/Nestor.jpeg">
+
+  <title>Portafolio Machine Learning &ndash; Caso de Estudio Titanic</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="/">
+      <img src="/images/Nestor.jpeg" alt="Néstor Martínez" title="Néstor Martínez">
+    </a>
+
+    <h1>
+      <a href="/">Néstor Martínez</a>
+    </h1>
+
+
+
+
+    <ul class="social">
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/néstor-martínez-759122232/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/noesnestor"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-envelope"
+rel="me"           href="mailto:nestor.marvi@gmail.com"
+           target="_blank">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="/">Home</a>
+
+  <a href="/archives">Historial</a>
+  <a href="/categories">Categorías</a>
+
+
+</nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="caso-de-estudio-titanic">Caso de Estudio Titanic</h1>
+    <p>
+      Posted on lun. 02 Octubre 2023 in <a href="/category/caso-de-estudio.html">Caso de Estudio</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <h1>Introducción</h1>
+<p>En este caso de estudio utilizaremos la rama de Machine Learning para predecir nuestras capacidades para sobrevivir si estuviésemos en el Titanic, creando un Modelo de predicción automático en Python. Para esto, haremos uso de librerías de Python que nos ayudarán a la hora de manejar los datos y el armado del Modelo de Predicción.</p>
+<p>Este artículo fue generado en base a este <a href="https://www.kaggle.com/code/samsonqian/titanic-guide-with-sklearn-and-eda/notebook?scriptVersionId=17744221">Kernel</a>.</p>
+<h2>Problema</h2>
+<p>Nosotros queremos predecir, en base a un conjunto de datos, si la persona <strong>sobrevivió o no</strong>. El algoritmo entonces deberá funcionar como un clasificador, basándose en los datos ya existentes para colocar datos subsiguientes en estas dos categorias. A este tipo de algoritmos se le conocen como <strong>Problemas de Clasificación</strong>.</p>
+<p>Como el Titanic es un evento histórico popular, existen datos registrados acerca de las personas que embarcaron en el Titanic, conjunto con la información pertinente a su supervivencia al catastrófico evento. Por ende, lo que buscamos es conocer <strong>la fórmula</strong> que conecta los datos de la persona con su supervivencia. A este tipo de aprendizajes se les conoce como <strong>Aprendizajes Supervisados</strong>, ya que nuestra función es de corregir al algoritmo hacia el mejor resultado posible, ya que el resultado ya lo conocemos. </p>
+<h3>Librerías</h3>
+<p>Previo a comenzar a programar algo, debemos de investigar si existen librerías abiertas capaces de ayudarnos con el trabajo que realizaremos (No reinventemos la rueda). Para esto, haremos uso de las siguientes librerías:
+* <a href="https://numpy.org">NumPy</a>
+* <a href="https://pandas.pydata.org">Pandas</a>
+* <a href="https://seaborn.pydata.org">Seaborn</a>
+* <a href="https://matplotlib.org">Matplotlib</a>
+* <a href="https://scikit-learn.org">Sklearn</a>
+* <a href="https://xgboost.readthedocs.io/en/stable/">XGBoost</a></p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span> 
+<span class="c1"># %matplotlib inline es útil para Jupyter notebooks</span>
+</code></pre></div>
+
+<h3>Importar datos</h3>
+<p>Como nuestro modelo se generará con Aprendizaje Supervisado, debemos de utilizar datos con los cuales entrenar a nuestro modelo. Para esto, tenemos unos archivos .csv llamados <code>train.csv</code> y <code>test.csv</code>. Estos archivos serán utilizados para funcionalidades distintas: Uno de ellos lo utilizará el modelo para aprender y el otro será utilizado para comprobar el aprendizaje del modelo, respectivamente.</p>
+<p>Para importar datos haremos uso de la librería de pandas, la cual tiene un método que lee archivos <code>.csv</code> y los almacena en estructuras llamadas <code>DataFrames</code>, estructuras matriciales con ejes numerados. </p>
+<div class="highlight"><pre><span></span><code><span class="n">training</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;datos/train.csv&quot;</span><span class="p">)</span>
+<span class="n">testing</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;datos/test.csv&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Visualizandolos en forma de tabla podemos ver:</p>
+<div class="highlight"><pre><span></span><code><span class="n">training</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PassengerId</th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Ticket</th>
+      <th>Fare</th>
+      <th>Cabin</th>
+      <th>Embarked</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Braund, Mr. Owen Harris</td>
+      <td>male</td>
+      <td>22.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>A/5 21171</td>
+      <td>7.2500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Cumings, Mrs. John Bradley (Florence Briggs Th...</td>
+      <td>female</td>
+      <td>38.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>PC 17599</td>
+      <td>71.2833</td>
+      <td>C85</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1</td>
+      <td>3</td>
+      <td>Heikkinen, Miss. Laina</td>
+      <td>female</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>STON/O2. 3101282</td>
+      <td>7.9250</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Futrelle, Mrs. Jacques Heath (Lily May Peel)</td>
+      <td>female</td>
+      <td>35.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>113803</td>
+      <td>53.1000</td>
+      <td>C123</td>
+      <td>S</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>0</td>
+      <td>3</td>
+      <td>Allen, Mr. William Henry</td>
+      <td>male</td>
+      <td>35.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>373450</td>
+      <td>8.0500</td>
+      <td>NaN</td>
+      <td>S</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Análisis de datos</h3>
+<p>Es importante saber qué datos estamos manejando a todo momento, ya que es esto lo que le otorgaremos al algoritmo para posteriormente tomar decisiones. Para hacer esto, el DataFrame de Pandas trae consigo comportamiento capaz de mostrar los datos que maneja:</p>
+<div class="highlight"><pre><span></span><code><span class="n">training</span><span class="o">.</span><span class="n">dtypes</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="nx">PassengerId</span><span class="w">      </span><span class="nx">int64</span>
+<span class="nx">Survived</span><span class="w">         </span><span class="nx">int64</span>
+<span class="nx">Pclass</span><span class="w">           </span><span class="nx">int64</span>
+<span class="nx">Name</span><span class="w">            </span><span class="nx">object</span>
+<span class="nx">Sex</span><span class="w">             </span><span class="nx">object</span>
+<span class="nx">Age</span><span class="w">            </span><span class="nx">float64</span>
+<span class="nx">SibSp</span><span class="w">            </span><span class="nx">int64</span>
+<span class="nx">Parch</span><span class="w">            </span><span class="nx">int64</span>
+<span class="nx">Ticket</span><span class="w">          </span><span class="nx">object</span>
+<span class="nx">Fare</span><span class="w">           </span><span class="nx">float64</span>
+<span class="nx">Cabin</span><span class="w">           </span><span class="nx">object</span>
+<span class="nx">Embarked</span><span class="w">        </span><span class="nx">object</span>
+<span class="nx">dtype</span><span class="p">:</span><span class="w"> </span><span class="nx">object</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">testing</span><span class="o">.</span><span class="n">dtypes</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="nx">PassengerId</span><span class="w">      </span><span class="nx">int64</span>
+<span class="nx">Pclass</span><span class="w">           </span><span class="nx">int64</span>
+<span class="nx">Name</span><span class="w">            </span><span class="nx">object</span>
+<span class="nx">Sex</span><span class="w">             </span><span class="nx">object</span>
+<span class="nx">Age</span><span class="w">            </span><span class="nx">float64</span>
+<span class="nx">SibSp</span><span class="w">            </span><span class="nx">int64</span>
+<span class="nx">Parch</span><span class="w">            </span><span class="nx">int64</span>
+<span class="nx">Ticket</span><span class="w">          </span><span class="nx">object</span>
+<span class="nx">Fare</span><span class="w">           </span><span class="nx">float64</span>
+<span class="nx">Cabin</span><span class="w">           </span><span class="nx">object</span>
+<span class="nx">Embarked</span><span class="w">        </span><span class="nx">object</span>
+<span class="nx">dtype</span><span class="p">:</span><span class="w"> </span><span class="nx">object</span>
+</code></pre></div>
+
+<h4>Significado de los datos</h4>
+<p>Esto nos muestra los tipos de datos que maneja python a la hora de transformar los datos que obtuvo en un archivo <code>.csv</code>, pero no nos dice nada acerca del <strong>significado de los datos</strong>. Cuando uno obtiene un dataset, uno siempre debe de conocer qué significa cada dato, de forma tal de realizar operaciones sobre el mismo sin que el conjunto de datos pierda el significado que tiene. Ahora presento una tabla con la información acerca de cada dato particular:</p>
+<p><img alt="Pelican" src="/images/UT2_PD4/tablaDatosTitanic.png"></p>
+<h4>Importancia de los datos</h4>
+<p>Ahora que sabemos qué significan nuestros datos, debemos de tomar decisiones acerca de la importancia de estos datos a la hora de alimentárselos al modelo. Aquí buscaremos dos cosas particulares. <strong>Primero</strong>, si tenemos datos que estan intrínsecamente conectados entre sí y no con la variable que estamos intentando predecir, siempre es mejor quedarnos con uno de los dos datos. Esto es porque al final del día el proceso de aprendizaje es costoso, y siempre nos sirve recortar información de relleno donde la haya. <strong>Segundo</strong>, debemos de entender el caso que estamos analizando y lo que queremos predecir, y en base a esta comprensión preguntarnos qué variables realmente influyen a la hora de realizar un análisis.</p>
+<h4>Datos conectados entre sí</h4>
+<p>Existen métodos para entender la conexión entre datos, como el uso de matrices de correlación, pero previo a saltar a eso, podemos tomarnos un tiempo para pensar lógicamente qué datos asumimos que estan conectados, y en base a esto podemos empezar a hacer decisiones. Esto lo podemos hacer si comprendemos correctamente el caso de estudio, lo cual ya definimos arriba. </p>
+<p>Dentro de los datos conectados, podemos establecer que el número de la cabina en la cual las personas embarcaron está conectada con el número de clase en el que viajaban. Al final del día, las cabinas estan contenidas en los sectores, y según el sector, a qué clase correspondía, con los sectores más bajos siendo otorgados a las clases más bajas.
+Por ende, podemos considerar que el número de cabina es una variable intrínsecamente conectada a la variable de clase de pasajero.</p>
+<p>Podríamos decir lo mismo para el costo del pasaje, ya que podríamos asumir que existe una relación entre el costo de los pasajes y la clase en la cual viajan las personas. Para decidir con cuál quedarnos (y confirmar nuestras asunciones), utilizaremos la <strong>matriz de correlaciones</strong>.</p>
+<h4>Datos Innecesarios</h4>
+<p>Pongámonos en los pies del algoritmo por un segundo. Nosotros tenemos que decidir en base a los datos si una persona sobrevive o no. Existe una clave a la hora de visualizar datos que nos permite identificar datos que son innecesarios. Por lo general, valores que se almacenan en datos como identificadores, son básicamente inútiles, ya que su función es identificar los valores que existen en la base de datos. El caso más obvio es el PassengerId, que solo sirve para identificar personas. </p>
+<p>En el caso del número de ticket, su función es identificar el ticket que se tomó, por lo cual podemos asumir que es innecesario a la hora de analizar si sobrevives o no.</p>
+<p>También podemos descartar cosas como los nombres y el número de cabina, ya que sirven como identificadores de la persona y de la zona en la cual se hospedó el pasajero, respectivamente.</p>
+<p>Para aplicar una matriz de correlación, debemos de utilizar únicamente valores numéricos, ya que al fin y al cabo se saca en base a un concepto estadístico. Removeremos los datos innecesarios y transformaremos el resto a numéricos para entender qué tan correlacionados están con la variable objetivo.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Transformación de los datos de Sexo a una variable numérica binaria, con 1 = hombre y 0 = mujer</span>
+<span class="n">le_sex</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">le_sex</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">training</span><span class="p">[</span><span class="s2">&quot;Sex&quot;</span><span class="p">])</span>
+
+<span class="n">encoded_sex_training</span> <span class="o">=</span> <span class="n">le_sex</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">training</span><span class="p">[</span><span class="s2">&quot;Sex&quot;</span><span class="p">])</span>
+<span class="n">training</span><span class="p">[</span><span class="s2">&quot;Sex&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">encoded_sex_training</span>
+<span class="n">encoded_sex_testing</span> <span class="o">=</span> <span class="n">le_sex</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">testing</span><span class="p">[</span><span class="s2">&quot;Sex&quot;</span><span class="p">])</span>
+<span class="n">testing</span><span class="p">[</span><span class="s2">&quot;Sex&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">encoded_sex_testing</span>
+
+<span class="c1"># Transformación de los valores de embarcado a una variable numérica que representa las tres categorías (C,Q,S):</span>
+<span class="c1"># S = 0, C = 1, Q = 2</span>
+<span class="n">le_embarked</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">le_embarked</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">training</span><span class="p">[</span><span class="s2">&quot;Embarked&quot;</span><span class="p">])</span>
+
+<span class="n">encoded_embarked_training</span> <span class="o">=</span> <span class="n">le_embarked</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">training</span><span class="p">[</span><span class="s2">&quot;Embarked&quot;</span><span class="p">])</span>
+<span class="n">training</span><span class="p">[</span><span class="s2">&quot;Embarked&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">encoded_embarked_training</span>
+<span class="n">encoded_embarked_testing</span> <span class="o">=</span> <span class="n">le_embarked</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">testing</span><span class="p">[</span><span class="s2">&quot;Embarked&quot;</span><span class="p">])</span>
+<span class="n">testing</span><span class="p">[</span><span class="s2">&quot;Embarked&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">encoded_embarked_testing</span>
+
+<span class="n">training</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;PassengerId&quot;</span><span class="p">,</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span><span class="s2">&quot;Ticket&quot;</span><span class="p">,</span><span class="s2">&quot;Cabin&quot;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">testing</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;PassengerId&quot;</span><span class="p">,</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span><span class="s2">&quot;Ticket&quot;</span><span class="p">,</span><span class="s2">&quot;Cabin&quot;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+<h4>Datos faltantes</h4>
+<p>Previo a hacer la matriz de correlación, deberíamos de saber si existen datos faltantes dentro de los datasets. En el caso de que existiesen, pueden afectar los valores resultantes de la matriz. Para esto, utilizaremos otro método de Pandas:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Dataset de entrenamiento del modelo</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">training</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="nx">Survived</span><span class="w">      </span><span class="mi">0</span>
+<span class="nx">Pclass</span><span class="w">        </span><span class="mi">0</span>
+<span class="nx">Sex</span><span class="w">           </span><span class="mi">0</span>
+<span class="nx">Age</span><span class="w">         </span><span class="mi">177</span>
+<span class="nx">SibSp</span><span class="w">         </span><span class="mi">0</span>
+<span class="nx">Parch</span><span class="w">         </span><span class="mi">0</span>
+<span class="nx">Fare</span><span class="w">          </span><span class="mi">0</span>
+<span class="nx">Embarked</span><span class="w">      </span><span class="mi">0</span>
+<span class="nx">dtype</span><span class="p">:</span><span class="w"> </span><span class="nx">int64</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># Dataset de testeo del modelo</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">testing</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="nx">Pclass</span><span class="w">       </span><span class="mi">0</span>
+<span class="nx">Sex</span><span class="w">          </span><span class="mi">0</span>
+<span class="nx">Age</span><span class="w">         </span><span class="mi">86</span>
+<span class="nx">SibSp</span><span class="w">        </span><span class="mi">0</span>
+<span class="nx">Parch</span><span class="w">        </span><span class="mi">0</span>
+<span class="nx">Fare</span><span class="w">         </span><span class="mi">1</span>
+<span class="nx">Embarked</span><span class="w">     </span><span class="mi">0</span>
+<span class="nx">dtype</span><span class="p">:</span><span class="w"> </span><span class="nx">int64</span>
+</code></pre></div>
+
+<p>Lo que podemos observar es una gran falta de valores de edad en ambos datasets. En base a esto, debemos de decidir uno de dos pasos posibles: O inyectamos datos artificiales mediante reglas como la media, mediana, mínimo, máximo, entre otros; o removemos las entradas sin estos datos. En ambos casos, estas acciones afectarán el comportamiento de los datos. Para esto veremos la cantidad de valores que tiene el DataFrame.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tamaño del dataset de entrenamiento:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">training</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Porcentaje de valores faltantes en base al total:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">((</span><span class="mi">177</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">training</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tamaño del dataset de testeo:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">testing</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Porcentaje de valores faltantes en base al total:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">((</span><span class="mi">86</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">testing</span><span class="p">))</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>Tamaño del dataset de entrenamiento:
+891
+Porcentaje de valores faltantes en base al total:
+19.865319865319865
+Tamaño del dataset de testeo:
+418
+Porcentaje de valores faltantes en base al total:
+20.574162679425836
+</code></pre></div>
+
+<p>La cantidad de valores faltantes de edad son alrededor del 20% del total. Esto es un valor muy significativo para remover sin afectar el resto del dataset de forma importante, por lo cual inyectaremos datos artificiales. Para esto, debemos de comprender la naturaleza de los datos de edad ya existentes en el dataset, por lo cual los mostraremos:</p>
+<div class="highlight"><pre><span></span><code><span class="n">copy</span> <span class="o">=</span> <span class="n">training</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">copy</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">copy</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">])</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">C</span><span class="o">:</span><span class="err">\</span><span class="n">Users</span><span class="err">\</span><span class="n">Néstor</span><span class="err">\</span><span class="n">AppData</span><span class="err">\</span><span class="k">Local</span><span class="err">\</span><span class="n">Temp</span><span class="err">\</span><span class="n">ipykernel_26080</span><span class="err">\</span><span class="mf">612444480.</span><span class="n">py</span><span class="o">:</span><span class="mi">3</span><span class="o">:</span><span class="w"> </span><span class="n">UserWarning</span><span class="o">:</span>
+
+<span class="n n-Quoted">`distplot`</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">deprecated</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">removed</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">seaborn</span><span class="w"> </span><span class="n">v0</span><span class="mf">.14.0</span><span class="p">.</span>
+
+<span class="n">Please</span><span class="w"> </span><span class="n">adapt</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="k">code</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">use</span><span class="w"> </span><span class="n">either</span><span class="w"> </span><span class="n n-Quoted">`displot`</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="n">figure</span><span class="o">-</span><span class="k">level</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="k">with</span>
+<span class="n">similar</span><span class="w"> </span><span class="n">flexibility</span><span class="p">)</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n n-Quoted">`histplot`</span><span class="w"> </span><span class="p">(</span><span class="n">an</span><span class="w"> </span><span class="n">axes</span><span class="o">-</span><span class="k">level</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">histograms</span><span class="p">).</span>
+
+<span class="k">For</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">guide</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">updating</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="k">code</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">use</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">functions</span><span class="p">,</span><span class="w"> </span><span class="n">please</span><span class="w"> </span><span class="n">see</span>
+<span class="n">https</span><span class="o">://</span><span class="n">gist</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">mwaskom</span><span class="o">/</span><span class="n">de44147ed2974457ad6372750bbe5751</span>
+
+<span class="w">  </span><span class="n">sns</span><span class="p">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">copy</span><span class="err">[</span><span class="s2">&quot;Age&quot;</span><span class="err">]</span><span class="p">)</span>
+
+
+
+
+
+<span class="o">&lt;</span><span class="n">Axes</span><span class="o">:</span><span class="w"> </span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Density&#39;</span><span class="o">&gt;</span>
+</code></pre></div>
+
+<p><img alt="Pelican" src="/images/UT2_PD4/ClasificacionTitanic_files/ClasificacionTitanic_21_2.png"></p>
+<p>En base a esta distribución de datos, podemos observar que tiene un comportamiento similar a una campana gaussiana, aunque tiene un desfase hacia la derecha, con personas en sus 80. Por ende, la mejor opción sería utilizar la mediana para rellenar datos, ya que se ve menos afectada por outliers.</p>
+<div class="highlight"><pre><span></span><code><span class="n">training</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">training</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">(),</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">testing</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">testing</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">(),</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> 
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">training</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</code></pre></div>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Fare</th>
+      <th>Embarked</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Survived</th>
+      <td>1.000000</td>
+      <td>-0.338481</td>
+      <td>-0.543351</td>
+      <td>-0.064910</td>
+      <td>-0.035322</td>
+      <td>0.081629</td>
+      <td>0.257307</td>
+      <td>-0.163517</td>
+    </tr>
+    <tr>
+      <th>Pclass</th>
+      <td>-0.338481</td>
+      <td>1.000000</td>
+      <td>0.131900</td>
+      <td>-0.339898</td>
+      <td>0.083081</td>
+      <td>0.018443</td>
+      <td>-0.549500</td>
+      <td>0.157112</td>
+    </tr>
+    <tr>
+      <th>Sex</th>
+      <td>-0.543351</td>
+      <td>0.131900</td>
+      <td>1.000000</td>
+      <td>0.081163</td>
+      <td>-0.114631</td>
+      <td>-0.245489</td>
+      <td>-0.182333</td>
+      <td>0.104057</td>
+    </tr>
+    <tr>
+      <th>Age</th>
+      <td>-0.064910</td>
+      <td>-0.339898</td>
+      <td>0.081163</td>
+      <td>1.000000</td>
+      <td>-0.233296</td>
+      <td>-0.172482</td>
+      <td>0.096688</td>
+      <td>-0.014205</td>
+    </tr>
+    <tr>
+      <th>SibSp</th>
+      <td>-0.035322</td>
+      <td>0.083081</td>
+      <td>-0.114631</td>
+      <td>-0.233296</td>
+      <td>1.000000</td>
+      <td>0.414838</td>
+      <td>0.159651</td>
+      <td>0.066654</td>
+    </tr>
+    <tr>
+      <th>Parch</th>
+      <td>0.081629</td>
+      <td>0.018443</td>
+      <td>-0.245489</td>
+      <td>-0.172482</td>
+      <td>0.414838</td>
+      <td>1.000000</td>
+      <td>0.216225</td>
+      <td>0.038322</td>
+    </tr>
+    <tr>
+      <th>Fare</th>
+      <td>0.257307</td>
+      <td>-0.549500</td>
+      <td>-0.182333</td>
+      <td>0.096688</td>
+      <td>0.159651</td>
+      <td>0.216225</td>
+      <td>1.000000</td>
+      <td>-0.221226</td>
+    </tr>
+    <tr>
+      <th>Embarked</th>
+      <td>-0.163517</td>
+      <td>0.157112</td>
+      <td>0.104057</td>
+      <td>-0.014205</td>
+      <td>0.066654</td>
+      <td>0.038322</td>
+      <td>-0.221226</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h4>Matriz de Correlación</h4>
+<p>En una matriz de correlación, lo que se analiza es la fuerza con la cual dos variables están relacionadas entre sí. Existen tres tipos: Correlaciones positivas, Correlaciones negativas y Correlaciones nulas. Los coeficientes de correlación entre distintos valores están acotados entre -1 y 1, con los coeficientes $c$ de valor $0 &lt; c \leq 1$ conformando Correlaciones positivas y los coeficientes $c$ de valor $-1 \geq c &lt; 0$ siendo Correlaciones negativas. </p>
+<p>Lo único en lo que influirá el signo de la Correlación es la dirección con la que se mueven los atributos, con las correlaciones positivas moviendose en el mismo sentido (proporcionales entre sí) y las negativas en el sentido contrario (inversamente proporcionales). </p>
+<p>El valor absoluto entonces representa la intensidad de la interacción entre atributos, y se pueden clasificar en estas áreas:</p>
+<p><img alt="Pelican" src="/images/UT2_PD4/matrizCorrelacion.png"></p>
+<p>Cabe destacar que valores entre |0.2| a |0.4| muestran interacción entre atributos, pero no de forma estadísticamente significativa.</p>
+<p>Sacado de: North, M. (2012). Data mining for the masses (pp. 59-67). essay, CreateSpace.</p>
+<h4>Conclusiones</h4>
+<p>Como habíamos sugerido, existe una correlación entre el costo y la clase en la que uno se ubica, con costos mayores tendiendo a valores menores en la clase de pasajero (tiene sentido porque el valor más chico entre 1 y 3 es 1, y es el utilizado para representar pasajeros de primera clase). Viendo que el atributo de clase tiene una interacción mayor con la variable objetivo de supervivencia, es mejor quedarnos solo con esa clase.</p>
+<div class="highlight"><pre><span></span><code><span class="n">training</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Fare&quot;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">testing</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Fare&quot;</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Estos son los datos con los que nos quedamos en base al inicio:</p>
+<div class="highlight"><pre><span></span><code><span class="n">training</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Embarked</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>22.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>38.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>26.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>35.0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>35.0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h4>Visualización de los datos: Gráficos</h4>
+<p>La matriz de correlación puede ayudarnos a visualizar los datos que nos interesa que nos quedemos, pero no nos describe mucho acerca del comportamiento de los mismos. Para esto, utilizaremos gráficos que nos ayuden a visualizar mejor los datos que nos quedamos:</p>
+<h5>Sexo</h5>
+<p>Cabe destacar:
+* mujeres = 0
+* hombres = 1.</p>
+<div class="highlight"><pre><span></span><code><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Sex&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Survived&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">training</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribución de supervivencia basado en Sexo&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Sobrevivió&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Sexo&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">total_survived_females</span> <span class="o">=</span> <span class="n">training</span><span class="p">[</span><span class="n">training</span><span class="o">.</span><span class="n">Sex</span> <span class="o">==</span> <span class="mi">0</span><span class="p">][</span><span class="s2">&quot;Survived&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">total_survived_males</span> <span class="o">=</span> <span class="n">training</span><span class="p">[</span><span class="n">training</span><span class="o">.</span><span class="n">Sex</span> <span class="o">==</span> <span class="mi">1</span><span class="p">][</span><span class="s2">&quot;Survived&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cantidad total de supervivientes: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">((</span><span class="n">total_survived_females</span> <span class="o">+</span> <span class="n">total_survived_males</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Proporción de mujeres que sobrevivieron:&quot;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">total_survived_females</span><span class="o">/</span><span class="p">(</span><span class="n">total_survived_females</span> <span class="o">+</span> <span class="n">total_survived_males</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Proporción de hombres que sobrevivieron:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">total_survived_males</span><span class="o">/</span><span class="p">(</span><span class="n">total_survived_females</span> <span class="o">+</span> <span class="n">total_survived_males</span><span class="p">))</span>
+</code></pre></div>
+
+<p><img alt="Pelican" src="/images/UT2_PD4/ClasificacionTitanic_files/ClasificacionTitanic_31_0.png"></p>
+<div class="highlight"><pre><span></span><code>Cantidad total de supervivientes: 342
+Proporción de mujeres que sobrevivieron:
+0.6812865497076024
+Proporción de hombres que sobrevivieron:
+0.31871345029239767
+</code></pre></div>
+
+<h5>Clase</h5>
+<div class="highlight"><pre><span></span><code><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Pclass&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Survived&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">training</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Ratio de Supervivencia&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Clase del Pasajero&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribución de supervivencia basada en clase&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">total_survived_one</span> <span class="o">=</span> <span class="n">training</span><span class="p">[</span><span class="n">training</span><span class="o">.</span><span class="n">Pclass</span> <span class="o">==</span> <span class="mi">1</span><span class="p">][</span><span class="s2">&quot;Survived&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">total_survived_two</span> <span class="o">=</span> <span class="n">training</span><span class="p">[</span><span class="n">training</span><span class="o">.</span><span class="n">Pclass</span> <span class="o">==</span> <span class="mi">2</span><span class="p">][</span><span class="s2">&quot;Survived&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">total_survived_three</span> <span class="o">=</span> <span class="n">training</span><span class="p">[</span><span class="n">training</span><span class="o">.</span><span class="n">Pclass</span> <span class="o">==</span> <span class="mi">3</span><span class="p">][</span><span class="s2">&quot;Survived&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">total_survived_class</span> <span class="o">=</span> <span class="n">total_survived_one</span> <span class="o">+</span> <span class="n">total_survived_two</span> <span class="o">+</span> <span class="n">total_survived_three</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cantidad total de supervivientes: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">total_survived_class</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Proporción de personas de Primera Clase que sobrevivieron:&quot;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">total_survived_one</span><span class="o">/</span><span class="n">total_survived_class</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Proporción de personas de Segunda Clase que sobrevivieron:&quot;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">total_survived_two</span><span class="o">/</span><span class="n">total_survived_class</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Proporción de personas de Tercera Clase que sobrevivieron:&quot;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">total_survived_three</span><span class="o">/</span><span class="n">total_survived_class</span><span class="p">)</span>
+</code></pre></div>
+
+<p><img alt="Pelican" src="/images/UT2_PD4/ClasificacionTitanic_files/ClasificacionTitanic_33_0.png"></p>
+<div class="highlight"><pre><span></span><code>Cantidad total de supervivientes: 342
+Proporción de personas de Primera Clase que sobrevivieron:
+0.39766081871345027
+Proporción de personas de Segunda Clase que sobrevivieron:
+0.2543859649122807
+Proporción de personas de Tercera Clase que sobrevivieron:
+0.347953216374269
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Pclass&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Survived&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Sex&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">training</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Ratio de Supervivencia&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Clase del Pasajero y Sexo&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Ratio de Supervivencia basado en Sexo y Clase de Pasajero&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>Text(0.5, 1.0, &#39;Ratio de Supervivencia basado en Sexo y Clase de Pasajero&#39;)
+</code></pre></div>
+
+<p><img alt="Pelican" src="/images/UT2_PD4/ClasificacionTitanic_files/ClasificacionTitanic_34_1.png"></p>
+<div class="highlight"><pre><span></span><code><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Sex&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Survived&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Pclass&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">training</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Ratio de Supervivencia&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Clase del Pasajero y Sexo&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Ratio de Supervivencia basado en Sexo y Clase de Pasajero&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>Text(0.5, 1.0, &#39;Ratio de Supervivencia basado en Sexo y Clase de Pasajero&#39;)
+</code></pre></div>
+
+<p><img alt="Pelican" src="/images/UT2_PD4/ClasificacionTitanic_files/ClasificacionTitanic_35_1.png"></p>
+<h4>Edad</h4>
+<div class="highlight"><pre><span></span><code><span class="n">survived_ages</span> <span class="o">=</span> <span class="n">training</span><span class="p">[</span><span class="n">training</span><span class="o">.</span><span class="n">Survived</span> <span class="o">==</span> <span class="mi">1</span><span class="p">][</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span>
+<span class="n">not_survived_ages</span> <span class="o">=</span> <span class="n">training</span><span class="p">[</span><span class="n">training</span><span class="o">.</span><span class="n">Survived</span> <span class="o">==</span> <span class="mi">0</span><span class="p">][</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">survived_ages</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sobrevivió&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Proporción&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">not_survived_ages</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;No sobrevivió&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">right</span><span class="o">=</span><span class="mf">1.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+<p><img alt="Pelican" src="/images/UT2_PD4/ClasificacionTitanic_files/ClasificacionTitanic_37_1.png"></p>
+<div class="highlight"><pre><span></span><code><span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Survived&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">training</span><span class="p">,</span> <span class="n">jitter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+<p><img alt="Pelican" src="/images/UT2_PD4/ClasificacionTitanic_files/ClasificacionTitanic_38_1.png"></p>
+<h3>Normalización de los datos</h3>
+<p>Dependiendo del algoritmo a utilizar, puede que influya el valor numérico del atributo en comparación con el resto, haciéndolo pensar que es más importante que el resto. Esto sucede porque los atributos no siguen todos un mismo conjunto de valores numéricos para representarse. Para solucionarlo, podemos normalizar los valores. En particular, la gran mayoría de nuestros valores restantes son categóricos(clase de pasajero, puerto de embarcación, sexo), los cuales no deberíamos de normalizar ya que sino pierden su significado. Por el otro lado, podemos normalizar el resto de los valores de forma tal de que no sean tan importantes que el resto en los ojos de un algoritmo.</p>
+<p>Para esto haremos uso de la z-transformación, la cual convierte a los valores en un rango de -1 a 1, con un promedio de 0 y una desviación estándar de 1 para cada atributo. Esto lo podemos encontrar en la librería de sklearn:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+
+<span class="c1">#We need to reshape our data since the Scaler takes in arrays</span>
+<span class="n">ages_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">training</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ages_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">testing</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">training</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">ages_train</span><span class="p">)</span>
+<span class="n">testing</span><span class="p">[</span><span class="s2">&quot;Age&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">ages_test</span><span class="p">)</span>
+</code></pre></div>
+
+<p>La tabla resultante de estos cambios:</p>
+<div class="highlight"><pre><span></span><code><span class="n">training</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Survived</th>
+      <th>Pclass</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>SibSp</th>
+      <th>Parch</th>
+      <th>Embarked</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>-0.565736</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0.663861</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>-0.258337</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0.433312</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>0.433312</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3>Modelado</h3>
+<p>Luego de todos los procesos realizados, es momento de modelar. Para esto importaremos distintos algoritmos de aprendizaje de Machine Learning y evaluaremos cuál de estos otorga los mejores resultados (mayor cantidad de aciertos a la hora de testear) a la hora de aplicarlo a nuestro set de datos de testeo. Primero, los algoritmos de aprendizaje a utilizar:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span><span class="p">,</span> <span class="n">LinearSVC</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+</code></pre></div>
+
+<p>Luego, la forma con la cual evaluaremos los resultados obtenidos para cada modelo generado:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">make_scorer</span><span class="p">,</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">X_train</span> <span class="o">=</span> <span class="n">training</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Survived&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#conjunto de variables de entrenamiento</span>
+<span class="n">Y_train</span> <span class="o">=</span> <span class="n">training</span><span class="p">[</span><span class="s2">&quot;Survived&quot;</span><span class="p">]</span> <span class="c1">#La variable objetivo</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">testing</span>
+</code></pre></div>
+
+<h4>Dataset de Validación</h4>
+<p>Para que los datos no se acoplen al set de datos de testeo, es preferible tener un tercer dataset de validación para asegurarnos que esto no ocurra. Para esto utilizaremos otra de las funciones de sklearn:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span> <span class="c1">#para generar el Dataset de Validaci´pon</span>
+
+<span class="n">X_training</span><span class="p">,</span> <span class="n">X_valid</span><span class="p">,</span> <span class="n">y_training</span><span class="p">,</span> <span class="n">y_valid</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="c1">#X_valid y y_valid son los sets de validación</span>
+</code></pre></div>
+
+<h4>SVC</h4>
+<div class="highlight"><pre><span></span><code><span class="n">svc_clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">()</span> 
+
+<span class="n">parameters_svc</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;kernel&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;rbf&quot;</span><span class="p">,</span> <span class="s2">&quot;linear&quot;</span><span class="p">],</span> <span class="s2">&quot;probability&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="s2">&quot;verbose&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]}</span>
+
+<span class="n">grid_svc</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">svc_clf</span><span class="p">,</span> <span class="n">parameters_svc</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">make_scorer</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">))</span>
+<span class="n">grid_svc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_training</span><span class="p">,</span> <span class="n">y_training</span><span class="p">)</span>
+
+<span class="n">svc_clf</span> <span class="o">=</span> <span class="n">grid_svc</span><span class="o">.</span><span class="n">best_estimator_</span>
+
+<span class="n">svc_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_training</span><span class="p">,</span> <span class="n">y_training</span><span class="p">)</span>
+<span class="n">pred_svc</span> <span class="o">=</span> <span class="n">svc_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_valid</span><span class="p">)</span>
+<span class="n">acc_svc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_valid</span><span class="p">,</span> <span class="n">pred_svc</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Puntaje de SVC: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">acc_svc</span><span class="p">))</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>Puntaje de SVC: 0.8100558659217877
+</code></pre></div>
+
+<h4>SVC Lineal</h4>
+<div class="highlight"><pre><span></span><code><span class="n">linsvc_clf</span> <span class="o">=</span> <span class="n">LinearSVC</span><span class="p">()</span>
+
+<span class="n">parameters_linsvc</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;multi_class&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;ovr&quot;</span><span class="p">,</span> <span class="s2">&quot;crammer_singer&quot;</span><span class="p">],</span> <span class="s2">&quot;fit_intercept&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="s2">&quot;max_iter&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1500</span><span class="p">]}</span>
+
+<span class="n">grid_linsvc</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">linsvc_clf</span><span class="p">,</span> <span class="n">parameters_linsvc</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">make_scorer</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">))</span>
+<span class="n">grid_linsvc</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_training</span><span class="p">,</span> <span class="n">y_training</span><span class="p">)</span>
+
+<span class="n">linsvc_clf</span> <span class="o">=</span> <span class="n">grid_linsvc</span><span class="o">.</span><span class="n">best_estimator_</span>
+
+<span class="n">linsvc_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_training</span><span class="p">,</span> <span class="n">y_training</span><span class="p">)</span>
+<span class="n">pred_linsvc</span> <span class="o">=</span> <span class="n">linsvc_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_valid</span><span class="p">)</span>
+<span class="n">acc_linsvc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_valid</span><span class="p">,</span> <span class="n">pred_linsvc</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Puntaje de SVC Linear: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">acc_linsvc</span><span class="p">))</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>Puntaje de SVC Linear: 0.7988826815642458
+</code></pre></div>
+
+<h4>Modelo de Bosques Aleatorios</h4>
+<div class="highlight"><pre><span></span><code><span class="n">rf_clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">()</span>
+
+<span class="n">parameters_rf</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;n_estimators&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span> <span class="s2">&quot;criterion&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;gini&quot;</span><span class="p">,</span> <span class="s2">&quot;entropy&quot;</span><span class="p">],</span> <span class="s2">&quot;max_features&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="s2">&quot;sqrt&quot;</span><span class="p">,</span> <span class="s2">&quot;log2&quot;</span><span class="p">],</span> 
+                 <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="s2">&quot;min_samples_split&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]}</span>
+
+<span class="n">grid_rf</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">rf_clf</span><span class="p">,</span> <span class="n">parameters_rf</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">make_scorer</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">))</span>
+<span class="n">grid_rf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_training</span><span class="p">,</span> <span class="n">y_training</span><span class="p">)</span>
+
+<span class="n">rf_clf</span> <span class="o">=</span> <span class="n">grid_rf</span><span class="o">.</span><span class="n">best_estimator_</span>
+
+<span class="n">rf_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_training</span><span class="p">,</span> <span class="n">y_training</span><span class="p">)</span>
+<span class="n">pred_rf</span> <span class="o">=</span> <span class="n">rf_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_valid</span><span class="p">)</span>
+<span class="n">acc_rf</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_valid</span><span class="p">,</span> <span class="n">pred_rf</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The Score for Random Forest is: 0.8212290502793296</p>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Puntaje de Bosques Aleatorios: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">acc_rf</span><span class="p">))</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>Puntaje de Bosques Aleatorios: 0.8212290502793296
+</code></pre></div>
+
+<h4>Modelo de Regresión Logística</h4>
+<div class="highlight"><pre><span></span><code><span class="n">logreg_clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+
+<span class="n">parameters_logreg</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;penalty&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;l2&quot;</span><span class="p">],</span> <span class="s2">&quot;fit_intercept&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="s2">&quot;solver&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;newton-cg&quot;</span><span class="p">,</span> <span class="s2">&quot;lbfgs&quot;</span><span class="p">,</span> <span class="s2">&quot;liblinear&quot;</span><span class="p">,</span> <span class="s2">&quot;sag&quot;</span><span class="p">,</span> <span class="s2">&quot;saga&quot;</span><span class="p">],</span>
+                     <span class="s2">&quot;max_iter&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="s2">&quot;warm_start&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]}</span>
+
+<span class="n">grid_logreg</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">logreg_clf</span><span class="p">,</span> <span class="n">parameters_logreg</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">make_scorer</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">))</span>
+<span class="n">grid_logreg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_training</span><span class="p">,</span> <span class="n">y_training</span><span class="p">)</span>
+
+<span class="n">logreg_clf</span> <span class="o">=</span> <span class="n">grid_logreg</span><span class="o">.</span><span class="n">best_estimator_</span>
+
+<span class="n">logreg_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_training</span><span class="p">,</span> <span class="n">y_training</span><span class="p">)</span>
+<span class="n">pred_logreg</span> <span class="o">=</span> <span class="n">logreg_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_valid</span><span class="p">)</span>
+<span class="n">acc_logreg</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_valid</span><span class="p">,</span> <span class="n">pred_logreg</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Puntaje de Regresión Logística: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">acc_logreg</span><span class="p">))</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>Puntaje de Regresión Logística: 0.7932960893854749
+</code></pre></div>
+
+<h4>Modelo k-NN</h4>
+<div class="highlight"><pre><span></span><code><span class="n">knn_clf</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">()</span>
+
+<span class="n">parameters_knn</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;n_neighbors&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span> <span class="s2">&quot;weights&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="s2">&quot;distance&quot;</span><span class="p">],</span> <span class="s2">&quot;algorithm&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="s2">&quot;ball_tree&quot;</span><span class="p">,</span> <span class="s2">&quot;kd_tree&quot;</span><span class="p">],</span>
+                  <span class="s2">&quot;leaf_size&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">]}</span>
+
+<span class="n">grid_knn</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">knn_clf</span><span class="p">,</span> <span class="n">parameters_knn</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">make_scorer</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">))</span>
+<span class="n">grid_knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_training</span><span class="p">,</span> <span class="n">y_training</span><span class="p">)</span>
+
+<span class="n">knn_clf</span> <span class="o">=</span> <span class="n">grid_knn</span><span class="o">.</span><span class="n">best_estimator_</span>
+
+<span class="n">knn_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_training</span><span class="p">,</span> <span class="n">y_training</span><span class="p">)</span>
+<span class="n">pred_knn</span> <span class="o">=</span> <span class="n">knn_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_valid</span><span class="p">)</span>
+<span class="n">acc_knn</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_valid</span><span class="p">,</span> <span class="n">pred_knn</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Puntaje de Modelo k-NN: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">acc_knn</span><span class="p">))</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>Puntaje de Modelo k-NN: 0.7988826815642458
+</code></pre></div>
+
+<h4>Modelo Naïve Bayes Gaussiano</h4>
+<div class="highlight"><pre><span></span><code><span class="n">gnb_clf</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+
+<span class="n">parameters_gnb</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">grid_gnb</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">gnb_clf</span><span class="p">,</span> <span class="n">parameters_gnb</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">make_scorer</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">))</span>
+<span class="n">grid_gnb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_training</span><span class="p">,</span> <span class="n">y_training</span><span class="p">)</span>
+
+<span class="n">gnb_clf</span> <span class="o">=</span> <span class="n">grid_gnb</span><span class="o">.</span><span class="n">best_estimator_</span>
+
+<span class="n">gnb_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_training</span><span class="p">,</span> <span class="n">y_training</span><span class="p">)</span>
+<span class="n">pred_gnb</span> <span class="o">=</span> <span class="n">gnb_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_valid</span><span class="p">)</span>
+<span class="n">acc_gnb</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_valid</span><span class="p">,</span> <span class="n">pred_gnb</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Puntaje de Naïve Bayes Gaussiano: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">acc_gnb</span><span class="p">))</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>Puntaje de Naïve Bayes Gaussiano: 0.8044692737430168
+</code></pre></div>
+
+<h4>Modelo de Árbol de Decisiones</h4>
+<div class="highlight"><pre><span></span><code><span class="n">dt_clf</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">()</span>
+
+<span class="n">parameters_dt</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;criterion&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;gini&quot;</span><span class="p">,</span> <span class="s2">&quot;entropy&quot;</span><span class="p">],</span> <span class="s2">&quot;splitter&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;best&quot;</span><span class="p">,</span> <span class="s2">&quot;random&quot;</span><span class="p">],</span> <span class="s2">&quot;max_features&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="s2">&quot;sqrt&quot;</span><span class="p">,</span> <span class="s2">&quot;log2&quot;</span><span class="p">]}</span>
+
+<span class="n">grid_dt</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">dt_clf</span><span class="p">,</span> <span class="n">parameters_dt</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">make_scorer</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">))</span>
+<span class="n">grid_dt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_training</span><span class="p">,</span> <span class="n">y_training</span><span class="p">)</span>
+
+<span class="n">dt_clf</span> <span class="o">=</span> <span class="n">grid_dt</span><span class="o">.</span><span class="n">best_estimator_</span>
+
+<span class="n">dt_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_training</span><span class="p">,</span> <span class="n">y_training</span><span class="p">)</span>
+<span class="n">pred_dt</span> <span class="o">=</span> <span class="n">dt_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_valid</span><span class="p">)</span>
+<span class="n">acc_dt</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_valid</span><span class="p">,</span> <span class="n">pred_dt</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Puntaje del Árbol de Decisiones: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">acc_dt</span><span class="p">))</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>Puntaje del Árbol de Decisiones: 0.7932960893854749
+</code></pre></div>
+
+<h4>XGBClassifier</h4>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
+
+<span class="n">xg_clf</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">()</span>
+
+<span class="n">parameters_xg</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;objective&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;reg:linear&quot;</span><span class="p">],</span> <span class="s2">&quot;n_estimators&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">]}</span>
+
+<span class="n">grid_xg</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">xg_clf</span><span class="p">,</span> <span class="n">parameters_xg</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">make_scorer</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">))</span>
+<span class="n">grid_xg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_training</span><span class="p">,</span> <span class="n">y_training</span><span class="p">)</span>
+
+<span class="n">xg_clf</span> <span class="o">=</span> <span class="n">grid_xg</span><span class="o">.</span><span class="n">best_estimator_</span>
+
+<span class="n">xg_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_training</span><span class="p">,</span> <span class="n">y_training</span><span class="p">)</span>
+<span class="n">pred_xg</span> <span class="o">=</span> <span class="n">xg_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_valid</span><span class="p">)</span>
+<span class="n">acc_xg</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_valid</span><span class="p">,</span> <span class="n">pred_xg</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Puntaje del XGBoost: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">acc_xg</span><span class="p">))</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="nv">The</span><span class="w"> </span><span class="nv">Score</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">XGBoost</span><span class="w"> </span><span class="nv">is</span>:<span class="w"> </span><span class="mi">0</span>.<span class="mi">8379888268156425</span>
+</code></pre></div>
+
+<h3>Evaluacion de la Performance de los Modelos</h3>
+<p>Una vez generados todos los modelos, es hora de evaluar cuál de estos es el mejor para nuestro caso particular. Este será el que utilizaremos para testear:</p>
+<div class="highlight"><pre><span></span><code><span class="n">model_performance</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Model&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;SVC&quot;</span><span class="p">,</span> <span class="s2">&quot;Linear SVC&quot;</span><span class="p">,</span> <span class="s2">&quot;Random Forest&quot;</span><span class="p">,</span> 
+              <span class="s2">&quot;Logistic Regression&quot;</span><span class="p">,</span> <span class="s2">&quot;K Nearest Neighbors&quot;</span><span class="p">,</span> <span class="s2">&quot;Gaussian Naive Bayes&quot;</span><span class="p">,</span>  
+              <span class="s2">&quot;Decision Tree&quot;</span><span class="p">,</span> <span class="s2">&quot;XGBClassifier&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Accuracy&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">acc_svc</span><span class="p">,</span> <span class="n">acc_linsvc</span><span class="p">,</span> <span class="n">acc_rf</span><span class="p">,</span> 
+              <span class="n">acc_logreg</span><span class="p">,</span> <span class="n">acc_knn</span><span class="p">,</span> <span class="n">acc_gnb</span><span class="p">,</span> <span class="n">acc_dt</span><span class="p">,</span> <span class="n">acc_xg</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="n">model_performance</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;Accuracy&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Model</th>
+      <th>Accuracy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>7</th>
+      <td>XGBClassifier</td>
+      <td>0.837989</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Random Forest</td>
+      <td>0.821229</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>SVC</td>
+      <td>0.810056</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Gaussian Naive Bayes</td>
+      <td>0.804469</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>K Nearest Neighbors</td>
+      <td>0.798883</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Linear SVC</td>
+      <td>0.793296</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Logistic Regression</td>
+      <td>0.793296</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Decision Tree</td>
+      <td>0.793296</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="highlight"><pre><span></span><code><span class="n">xg_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_training</span><span class="p">,</span> <span class="n">y_training</span><span class="p">)</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">xg_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">testing</span>
+<span class="n">results</span><span class="p">[</span><span class="s2">&quot;Prediction&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">predictions</span>
+
+<span class="n">results</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;titanic.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy;  </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Portafolio Machine Learning ",
+  "url" : "",
+  "image": "/images/Nestor.jpeg",
+  "description": ""
+}
+</script>
+</body>
+</html>
