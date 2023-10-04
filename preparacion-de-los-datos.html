@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="spanish">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="/theme/pygments/github.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+
+
+  <link rel="shortcut icon" href="/images/coding.png" type="image/x-icon">
+  <link rel="icon" href="/images/coding.png" type="image/x-icon">
+
+
+
+
+
+ 
+
+<meta name="author" content="Néstor Martínez" />
+<meta name="description" content="Introducción La preparación es una de las partes fundamentales del modelo de proceso de data mining CRISP-DM. En ella, debemos de analizar si existen modificaciones que puedan mejorar el rendimiento de un posible modelo futuro, y si es así, debemos de aplicarlos. Para poner en práctica el teórico haremos uso …" />
+<meta name="keywords" content="">
+
+
+  <meta property="og:site_name" content="Portafolio Machine Learning"/>
+  <meta property="og:title" content="Preparación de los Datos"/>
+  <meta property="og:description" content="Introducción La preparación es una de las partes fundamentales del modelo de proceso de data mining CRISP-DM. En ella, debemos de analizar si existen modificaciones que puedan mejorar el rendimiento de un posible modelo futuro, y si es así, debemos de aplicarlos. Para poner en práctica el teórico haremos uso …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="/preparacion-de-los-datos.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2023-10-03 21:00:00-03:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="/author/nestor-martinez.html">
+  <meta property="article:section" content="Texto de Estudio"/>
+  <meta property="og:image" content="/images/Nestor.jpeg">
+
+  <title>Portafolio Machine Learning &ndash; Preparación de los Datos</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="/">
+      <img src="/images/Nestor.jpeg" alt="Néstor Martínez" title="Néstor Martínez">
+    </a>
+
+    <h1>
+      <a href="/">Néstor Martínez</a>
+    </h1>
+
+
+
+
+    <ul class="social">
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/néstor-martínez-759122232/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/noesnestor"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-envelope"
+rel="me"           href="mailto:nestor.marvi@gmail.com"
+           target="_blank">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="/">Home</a>
+
+  <a href="/archives">Historial</a>
+  <a href="/categories">Categorías</a>
+
+
+</nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="preparacion-de-los-datos">Preparación de los Datos</h1>
+    <p>
+      Posted on mar. 03 Octubre 2023 in <a href="/category/texto-de-estudio.html">Texto de Estudio</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <h1>Introducción</h1>
+<p>La preparación es una de las partes fundamentales del modelo de proceso de data mining CRISP-DM. En ella, debemos de analizar si existen modificaciones que puedan mejorar el rendimiento de un posible modelo futuro, y si es así, debemos de aplicarlos.</p>
+<p>Para poner en práctica el teórico haremos uso de la herramienta <a href="https://rapidminer.com">RapidMiner</a>.</p>
+<h1>Caso de Ejemplo</h1>
+<p>North (2012) nos propone el siguiente caso: </p>
+<p>Jerry es un manager de marketing de una firma pequeña de diseño de internet y publicidad. Su jefe le pide que desarrolle un data set incluyendo información acerca de los usuarios del Internet. La companía utilizará esta información para determinar qué tipos de usuarios utilizan el internet y como la firma puede mejorar su estrategia de marketing para que mejor se acople a los usuarios.</p>
+<p>Para hacer esto, Jerry hizo una encuesta online y publica links a la misma en páginas web populares. Una vez pasadas dos semanas, tiene la cantidad de datos suficiente para proseguir al análisis, pero se encuentra que los datos requieren ser optimizados; desde datos inválidos a datos faltantes, Jerry se da cuenta que hay mucho trabajo por hacer aún.</p>
+<p>Nótese que en este caso Jerry ya conoce la razón por la cual se obtendrán los datos, y cual es la utilidad que se les quiere otorgar, lo cual son cosas que debemos de saber en el paso de <strong>Business Understanding</strong> de CRISP-DM.</p>
+<p>Además, se conoce la fórma en la cual se conducirá la extracción de los datos y la forma en la cual se almacenarán, cosas que debemos preguntarnos una vez estemos en el paso de <strong>Data Understanding</strong> de CRISP-DM.</p>
+<p>Por ende, lo único que nos queda es proseguir con el tercer paso, que es la <strong>preparación de los datos</strong>.</p>
+<h1>Procedimiento</h1>
+<p>El libro Data Mining for the Masses enseña mediante la aplicación de los conocimientos en RapidMiner, y por ende tiene archivos <code>.csv</code> publicados en la web para que los lectores podamos seguirle el ritmo al libro. Si quieres hacer el procedimiento mientras lees este artículo, puedes acceder a los datos <a href="https://sites.google.com/site/dataminingforthemasses3e/">aquí</a> (el archivo que utilizaremos aquí es el del capítulo tres).</p>
+<h2>Data Scrubbing</h2>
+<p>Teniendo en cuenta que en el caso ejemplar se nos mencionó que se encontraron datos faltantes y datos inválidos, es momento de empezar a corregir estos datos de forma tal de que vuelvan a cobrar sentido. A esto se lo conoce como Data Scrubbing, y según North (2012), existen cuatro formas de data scrubbing:</p>
+<ul>
+<li>Manejo de datos faltantes</li>
+<li>Reducción de los datos</li>
+<li>Manejo de datos inconsistentes</li>
+<li>Reducción de atributos</li>
+</ul>
+<h3>Manejo de datos faltantes</h3>
+<p>Los <strong>datos faltantes</strong> son aquellos que, como dice la palabra, no están en nuestro data set. Estos datos generalmente se representan como nulos, y dependiendo de lo que creamos pertinente, la forma en la que los manejaremos. En el caso del data set de Jerry, en RapidMiner veremos estos datos faltantes con la forma del símbolo de pregunta <code>?</code>:</p>
+<p><img alt="Pelican" src="/images/dataPreparation/Untitled.png"></p>
+<p>Esto sería fácil de justificar si nos ponemos a ver la tabla de <code>Other_Social_Network</code> la cual dependiendo de la persona puede ser que tenga más de una red social en uso. Por ende, podríamos justificar que la falta de información ahí es comprensible en base a lo que se pidió del usuario. Por el otro lado, en secciones donde la respuesta es un sí o no, que haya un valor nulo simplemente no tiene sentido. En <code>Read_News, Online_Shopping y Online_Gaming</code> hay datos nulos, los cuales no tenemos idea de cómo interpretar. Para solucionar esto, reemplazaremos los valores nulos por otros valores, lo cual en RapidMiner se hace con el operador <code>Replace Missing Values</code>.</p>
+<h4>Replace Missing Values</h4>
+<p>Replace Missing Values es un operador de RapidMiner que al conectarse con un data set, ejecuta una función que toma los valores faltantes y los cambia en base a una <strong>función</strong>. Estas funciones pueden ser:</p>
+<ul>
+<li>Para valores numéricos:<ul>
+<li><strong>Mínimo:</strong> Los valores se reemplazan por el valor mínimo del atributo que tiene datos nulos.</li>
+<li><strong>Máximo:</strong> Los valores se reemplazan por el valor máximo del atributo que tiene datos nulos.</li>
+<li><strong>Media:</strong> Los valores se reemplazan por el valor resultante del cálculo de la media del atributo que tiene datos nulos.</li>
+<li><strong>Zero:</strong> Los valores se reemplazan por el número cero.</li>
+</ul>
+</li>
+<li>Para cualquier tipo de dato:<ul>
+<li><strong>Value:</strong> Los valores se reemplazan por un valor definido por el usuario.</li>
+</ul>
+</li>
+</ul>
+<p>Cabe destacar que el usuario tiene la posibilidad de elegir qué atributos quiere que tengan sus datos nulos reemplazados, otorgándo entonces estas opciones, entre otras:</p>
+<ul>
+<li><strong>All:</strong> Todos los atributos del data set tendrán sus datos nulos reemplazados en base a la función elegida.</li>
+<li><strong>Single:</strong> Se elige un atributo para que se aplique la función de reemplazo de datos nulos.</li>
+<li><strong>Subset:</strong> Se elige un conjunto de atributos para que se aplique la función de reemplazo de datos nulos.</li>
+</ul>
+<p>En caso de necesitar más información acerca del Operador Replace Missing Values, puedes verla <a href="https://docs.rapidminer.com/latest/studio/operators/cleansing/missing/replace_missing_values.html">aquí</a>.</p>
+<p>En nuestro caso reemplazaremos únicamente los datos del atributo Online_Gaming, y para esto utilizaremos la función Value, otorgándole N al dato faltante (ya que hay más N que Y). Tu RapidMiner debería de verse así:</p>
+<p><img alt="Pelican" src="/images/dataPreparation/Untitled_1.png"></p>
+<p>Una vez lo ejecutamos, podemos ver que se agregó correctamente al dato faltante el valor <code>N</code>:</p>
+<p><img alt="Pelican" src="/images/dataPreparation/Untitled_2.png"></p>
+<p>Uno se preguntaría que haremos con el resto de datos faltantes. Debemos de tener en cuenta que solo nos sirve reemplazar datos faltantes a columnas que planeamos mantener, lo cual nos lleva a la siguiente forma de Data Scrubbing…</p>
+<h3>Reducción de los datos</h3>
+<p>El proceso de reducir tus datos implica sacar del data set aquellas filas que nos sean problemáticos a la hora de alimentárselos a un algoritmo de Machine Learning para que nos genere un modelo. Esto lo podemos hacer en RapidMiner utilizando el Operador Filter Examples.</p>
+<h4>Filter Examples</h4>
+<p>Este operador contiene muchas variables posibles, por lo cual dejo la documentación <a href="https://docs.rapidminer.com/10.2/studio/operators/blending/examples/filter/filter_examples.html">aquí</a>. A efectos de este ejercicio, solo nos interesa que reduzca los datos en los cuales el Atributo <code>Online_Shopping</code> tenga un valor nulo. Para esto, debemos de utilizar la condición <code>attribute_value_filter</code> la cual nos deja colocar una condición para que reduzca datos. La condición en cuestión es: <code>Online_Shopping=.</code>. Esta condición busca en el data set las filas que tengan el valor nulo en <code>Online_Shopping</code>, y si tienen, se quitan del data set. Es importante saber que los nulos a la hora de representarlos en la condicional se representan con el punto <code>.</code>, aunque en la visualización se representen con el signo de pregunta.</p>
+<p>Nuestro RapidMiner debería de verse de esta forma:</p>
+<p><img alt="Pelican" src="/images/dataPreparation/Untitled_3.png"></p>
+<p>Al ejecutar el proceso podemos ver que tenemos menos filas de las que teníamos antes, empezando con once y ahora tenemos nueve. Estos datos siguen estando en el Operador Retrieve, lo que hace RapidMiner es que posterior a ese operador sólo se trabaje con los nueve restantes.</p>
+<p>En el caso de que no tengamos forma de interpretar de forma segura qué son esos datos nulos, simplemente es mejor removerlos antes de agregarles datos. Especialmente si estos datos no son numéricos, donde una función aritmética como la <strong>media, moda y mediana</strong> podrían sernos útiles.</p>
+<p><img alt="Pelican" src="/images/dataPreparation/Untitled_4.png"></p>
+<p>Para proseguir en el análisis de formas de Data Scrubbing, uno de los datos que utilizaremos como ejemplo en la siguiente forma fue removido por este proceso. Para recuperarlo, debemos eliminar el Operador Filter Examples de nuestro proceso (Si hacemos click en un operador y tocamos la tecla suprimir se borra del flujo). Una vez hecho, podemos proseguir a…</p>
+<h3>Manejo de datos inconsistentes</h3>
+<p>Los datos inconsistentes son datos que, en base a nuestra comprensión de la estructura de los datos, <strong>simplemente no tienen sentido</strong>. Ahora bien, esto podría abarcar también los datos faltantes, pero hay una clara diferencia, la cual es que en este caso <strong>el dato si existe</strong>.</p>
+<p>Para ver qué tipos de datos tienen cada uno de los atributos, podemos dirigirnos a la sección de Statistics de RapidMiner, la cual es visible una vez ejecutemos el proceso. Una vez ahí, podemos ver un claro ejemplo de un dato inconsistente:</p>
+<p><img alt="Pelican" src="/images/dataPreparation/Untitled_5.png"></p>
+<p>En este caso, por algúna razón, el atributo Twitter tiene un valor <code>99</code>, lo cual no tiene sentido, ya que solo deberíamos de poder escribir valores de Si o No (Y/N). Aquí tenemos dos opciones:</p>
+<ul>
+<li>Eliminar toda esa fila de datos</li>
+<li>Cambiar ese dato inconsistente por otro que tenga más sentido.</li>
+</ul>
+<p>A efectos de este procedimiento, reemplazaremos este valor por otro que tenga más sentido. Para esto, agregaremos otro Operador al flujo del proceso, el Operador Replace.</p>
+<h4>Replace</h4>
+<p>Similar a Replace Missing Values, tiene los mismos selectores de cantidad de atributos afectados por el operador. La diferencia radica en la forma en la cual actúa. En vez de utilizar funciónes como el promedio, este operador busca todos los valores que coincidan con el input colocado en <code>replace what</code> y los cambia por el input colocado en <code>replace by</code>.</p>
+<p>En nuestro caso, solo queremos reemplazar el “99” existente en el atributo <code>Twitter</code>. Para esto, configuraremos el operador Replace para que solo modifique el atributo <code>Twitter</code>, y en el campo <code>replace by</code>, colocaremos el valor <code>99</code>. Como estamos cambiando los datos, debemos de ser cuidadosos en base a qué valor le colocamos al dato inconsistente. Podemos guiarnos en las gráficas de arriba, las cuales nos dicen que la gran mayoría no usan Twitter, y por ende puede que sea aplicable a esta persona. Por ende, en el valor de <code>replace by</code> colocaremos <code>N</code>.</p>
+<p>Una vez ejecutemos el proceso, podemos ver que se aumentó en uno la cantidad de <code>N</code> que hay en el atributo <code>Twitter</code>:</p>
+<p><img alt="Pelican" src="/images/dataPreparation/Untitled_6.png"></p>
+<h3>Reducción de atributos</h3>
+<p>A la hora de armar una solución a una problemática con Machine Learning, siempre debemos de preguntarnos si en nuestro data set existen datos que simplemente son <strong>irrelevantes</strong> a la hora de armar la solución. Esto se puede visualizar con métodos que evalúen la <strong>correlación</strong> entre otros atributos, lo cual no es objeto de estudio para este articulo.</p>
+<p>En RapidMiner podemos remover atributos de la solución sin <strong>eliminarlos por completo</strong>, ya que pueden sernos útiles en otro momento. Para esto, utilizaremos el Operador Select Attributes:</p>
+<h4>Select Attributes</h4>
+<p>Este Operador nos permite elegir la cantidad de atributos que queremos que sigan en el flujo del proceso, excluyendo el resto. El Operador tiene dos tipos:</p>
+<ul>
+<li><strong>include attributes</strong>: En base a un filtro, incluirá a todos los que cumplan con él.</li>
+<li><strong>exclude attributes:</strong> En base a un filtro, excluirá a todos los que cumplan con él.</li>
+</ul>
+<p>Como podrán ver, hacemos mucha mención de los filtros. Similar a todos los Operadores que vimos, este tiene un input <code>attribute filter type</code> que permite elegir el filtro con el cual se eligirán los atributos que cumplan con él. Estos son los mismos que tiene el Operador <code>Replace Missing Values</code>, y a efectos de este artículo, eligiremos un subconjunto de atributos con los que nos quedaremos, por lo cual <code>attribute filter type</code> tiene de tipo <code>subset</code>.</p>
+<p>Al elegir esta opción, se nos muestra un botón para elegir el subset. Clickeamos en él y veremos esta pantalla:</p>
+<p><img alt="Pelican" src="/images/dataPreparation/Untitled_7.png"></p>
+<p>Lo que hacemos aquí es elegir todos los atributos de la izquierda y pasarlos a la derecha. Como el tipo de nuestro Operador es <code>include attributes</code>, todos los atributos que no se seleccionen quedarán afuera del flujo del proceso.</p>
+<p>Dependiendo del problema que queremos resolver el conjunto de atributos que seleccionaremos. Para seleccionarlos, clickeamos en el atributo y clickeamos la flecha que va hacia la derecha. Una vez seleccionamos todos los atributos que queremos le damos a Apply y ejecutamos el proceso. La problemática de Jerry era recabar información y mostrarla a la firma, por lo cual no requiere de cambios. Pero en el caso de que quiera conocer en qué redes sociales se encuentran las personas con más tiempo en el internet, puede seleccionar los atributos Years_on_Internet y los distintos atributos que mencionan redes sociales, para obtener la solución a esta pregunta.</p>
+<h1>Conclusión</h1>
+<ul>
+<li>Logramos definir los distintos procesos de Data Scrubbing, útiles para la preparación de datos.</li>
+<li>Logramos visualizar las distintas formas en las cuales podemos hacer procesos de Data Scrubbing en RapidMiner.</li>
+</ul>
+<h1>Bibliografía</h1>
+<p>North, M. (2012). DATA PREPARATION. In Data mining for the masses (pp. 25–56). essay, CreateSpace. </p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy;  </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Portafolio Machine Learning ",
+  "url" : "",
+  "image": "/images/Nestor.jpeg",
+  "description": ""
+}
+</script>
+</body>
+</html>
