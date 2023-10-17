@@ -148,7 +148,7 @@ rel="me"           href="mailto:nestor.marvi@gmail.com"
 </ul>
 <h4>Estudios</h4>
 <ul>
-<li>Exámenes sanguíneos</li>
+<li>Exámenes sanguíneos<ul>
 <li>Evalúa la cantidad de hemoglobina en sangre</li>
 <li>Evalúa la cantidad de creatina sérica</li>
 <li>Evalúa la cantidad de urea</li>
@@ -160,10 +160,16 @@ rel="me"           href="mailto:nestor.marvi@gmail.com"
 </ul>
 </li>
 <li>Evalúa la cantidad de glucosa en sangre</li>
-<li>Exámenes de orina</li>
+</ul>
+</li>
+<li>Exámenes de orina<ul>
 <li>Evalúa la cantidad de proteínas en la sangre, como la albumina</li>
-<li>Ultrasonido del riñón</li>
+</ul>
+</li>
+<li>Ultrasonido del riñón<ul>
 <li>Otorga una visualización de los riñones, que permiten ver posibles piedras renales.</li>
+</ul>
+</li>
 </ul>
 <p>Para hacer esto, haremos uso de <strong>machine learning</strong> para generar un modelo de predicción que en base a una serie de datos decida si una persona contrajo la enfermedad o no; de forma tal de que se le puedan hacer los tratamientos necesarios a tiempo. Este tipo de problemas a resolver por parte del modelo son conocidos como problemas de clasificación.</p>
 <h2>Comprensión de los datos</h2>
@@ -226,10 +232,12 @@ rel="me"           href="mailto:nestor.marvi@gmail.com"
 <p><img alt="Pelican" src="/images/ckd/RawCKDAtributes.png"></p>
 <h4>Observaciones</h4>
 <ul>
-<li>Al descargarlo, vemos que todos los atributos se nos cargaron como nominales, por lo cual debemos de cambiar los valores de los atributos para que se reflejen con los tipos establecidos en la descripción de los datos. Además, existen algunos datos que no tienen sentido dentro del data set:</li>
+<li>Al descargarlo, vemos que todos los atributos se nos cargaron como nominales, por lo cual debemos de cambiar los valores de los atributos para que se reflejen con los tipos establecidos en la descripción de los datos. Además, existen algunos datos que no tienen sentido dentro del data set:<ul>
 <li>El atributo "appet" (refiere a apetito), tiene un atributo "no". Se asume que refiere a poor, ya que "no" en apetito diría que no tiene apetito.</li>
 <li>El atributo "pe" (refiere a un Edema), tiene un atributo "good". Se asume que refiere a "no", ya que la enfermedad no puede estar bien, sino que la persona, por lo cual se cambiará a no.</li>
 <li>El atributo "class" tiene un atributo "no". Sabemos que existen 150 casos negativos y 250 casos positivos en el dataset. De estos 150, hay 149 en el formato apropiado. Además, existen 13 valores faltantes y 237 valores positivos, asumiremos que el "no" es de tipo "notckd" (refiere a que no cursa la enfermedad) y los 13 faltantes corresponden a personas que si cursan la enfermedad.</li>
+</ul>
+</li>
 <li>Aunque parezca que hay pocos datos faltantes, en realidad estos datos quedaron como un posible tipo de dato categórico, representado con el signo de pregunta (?).</li>
 </ul>
 <h3>Modificación de los datos</h3>
@@ -292,6 +300,21 @@ rel="me"           href="mailto:nestor.marvi@gmail.com"
 <p>Ahora que modificamos los datos de forma tal de que RapidMiner nos pueda decir la cantidad de datos faltantes, encontramos que:</p>
 <p><img alt="Pelican" src="/images/ckd/MissingValues.png"></p>
 <p>Debido a la cantidad baja de datos, llenaré los datos faltantes con el promedio.</p>
+<h3>Visualización de los datos</h3>
+<p>Para entender un poco más el data set, nos fijaremos en las causas más comunes de esta enfermedad, la diabetes y la hipertensión arterial, y revisaremos la importancia de estos atributos en el data set.</p>
+<h4>Diabetes</h4>
+<p><img alt="Pelican" src="/images/ckd/ScatterPlotDiabetes.png">
+En este data set, no existe persona que padezca de diabetes y no padezca de ERC. Lo interesante es que dentro de las personas que no tienen diabetes, las personas que no tienen ERC se concentran más sobre los 20 y 50 años, rango de edad en el cual Chavez (2014) no recomendaba analizar a aquellos que tenían hipertensión. </p>
+<h4>Presion Arterial Alta o Hipertensión Arterial</h4>
+<p><img alt="Pelican" src="/images/ckd/ScatterPlotHipertension.png">
+En este data set, no existe persona que padezca de hipertensión arterial y no padezca de ERC. Debido a la frecuencia de valores entre 70/80, podemos asumir que el atributo hipertensión mide la presión diastólica, que cuenta como hipertensión cuando los valores de la misma sobrepasan el 80. El problema con utilizar la presión diastólica es que, como muestra esta imágen producida por el Instituto del Corazón de Texas (2023):
+<img alt="Pelican" src="/images/ckd/Hipertension.png">
+Una persona puede tener presión elevada sin tener valores elevados de la presión diastólica. En este caso, sería más prudente sacar datos de la presion sistólica, ya que la misma se encuentra dividida en rangos distintos para cada sección posible de la presión arterial.</p>
+<h4>Combinación</h4>
+<p><img alt="Pelican" src="/images/ckd/HipertensionYDiabetes.png">
+Este gráfico confirma nuestras afirmaciones previas. En el data set, si tienes hipertensión arterial o diabetes, tienes un 100% de probabilidad de tener ERC. Ahora bien, Chavez (2014) hace bien en mencionar que la Diabetes es responsable del 35-40% de la ERC, mientras que la hipertensión arterial es responsable de un 30%. Esto es un salto importante con los hechos, y puede conllevar a que nuestro modelo termine tomando decisiones erróneas.</p>
+<h4>Conclusiones</h4>
+<p>Visualizar las causas deslumbró una posible problemática que tiene este data set, lo cual nos ayudará a comprender un poco más el comportamiento del modelo a la hora de que aprenda con estos datos.</p>
 <h2>Modelado</h2>
 <p>Primero, generaremos modelos con estos algoritmos (todos tienen la misma seed local):
 * k-NN
@@ -299,17 +322,17 @@ rel="me"           href="mailto:nestor.marvi@gmail.com"
 * Naive Bayes
 Estos algoritmos luego los evaluaremos mediante Cross Validation de 10 plegadas para conseguir el más performante de los tres, y una vez obtengamos el algoritmo, le aplicaremos a este algoritmo estos algoritmos de Feature Selection:
 * Forward Selection
-  * No hay límite de selecciones.
-  * Cero rondas especulativas.
-  * El algoritmo frena cuando no encuentra mejoras. 
+    * No hay límite de selecciones.
+    * Cero rondas especulativas.
+    * El algoritmo frena cuando no encuentra mejoras. 
 * Backward Elimination
-  * No hay límite de eliminaciones.
-  * Cero rondas especulativas.
-  * El algoritmo frena cuando no encuentra mejoras. 
+    * No hay límite de eliminaciones.
+    * Cero rondas especulativas.
+    * El algoritmo frena cuando no encuentra mejoras. 
 * Evolutionary Feature Selection 
-  * Esquema de selección de torneo.
-  * Tiene una población de veinte.
-  * Tiene un máximo de generaciones de treinta.
+    * Esquema de selección de torneo.
+    * Tiene una población de veinte.
+    * Tiene un máximo de generaciones de treinta.
 Para aplicarlo en RapidMiner, utilizaremos el operador de Cross-Validation, y dentro del mismo colocaremos en el lado de training el algoritmo, y en el lado de testing el operador Apply Model conectado a un operador de Performance (Classification), cuyo output será el que utilizaremos para medir qué algoritmo es más performante. Esto se ve de esta forma (Cambiar el algoritmo de la sección de Training por el algoritmo deseado):
 <img alt="Pelican" src="/images/ckd/Example_k-NN.png"></p>
 <h3>Naive Bayes</h3>
@@ -327,10 +350,13 @@ Para aplicarlo en RapidMiner, utilizaremos el operador de Cross-Validation, y de
 <h3>Evolutionary Feature Selection</h3>
 <p><img alt="Pelican" src="/images/ckd/LogisticRegressionEvo.png"></p>
 <h2>Conclusión</h2>
-<p>En base a un data set con 400 entradas, logramos conseguir un modelo con performance que parece ser demasiado buena para ser cierta. Esto puede pasar debido a que la cantidad de datos que hay no es muy alta, y por ende puede que el modelo se sobreaplique al data set.
+<p>En base a un data set con 400 entradas, logramos conseguir un modelo con performance que parece ser demasiado buena para ser cierta. Esto es algo que ya veníamos pensando como una posibilidad cuando visualizamos los datos, y me parece que dimos al clavo en ese entonces. No estaría dispuesto a confiar en este modelo (previo a la realización de un testeo con otros datos) debido a que las estadísticas que reflejan estos datos están demasiado por fuera de la realidad.
 Posteriormente, lo que quedaría es recabar más información e intentar testear el modelo generado con esos datos, para entender si realmente funciona o no, y en base a los resultados evaluar si hacer un Deploy del mismo o no.</p>
 <h2>Bibliografía</h2>
-<p>García, G., et al. (2014). Cuide su riñón  (1.ª ed.). Grupo editorial: Editorial Universidad de Guadalajara.</p>
+<ul>
+<li>García, G., et al. (2014). Cuide su riñón  (1.ª ed.). Grupo editorial: Editorial Universidad de Guadalajara.</li>
+<li>Presión Arterial Alta (hipertensión arterial). The Texas Heart Institute. (2023, July 1). https://www.texasheart.org/heart-health/heart-information-center/topics/presion-arterial-alta-hipertension-arterial/ </li>
+</ul>
   </div>
   <div class="tag-cloud">
     <p>
