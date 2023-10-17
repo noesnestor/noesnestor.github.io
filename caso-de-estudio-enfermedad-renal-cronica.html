@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+<html lang="spanish">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="/theme/pygments/github.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+
+
+  <link rel="shortcut icon" href="/images/coding.png" type="image/x-icon">
+  <link rel="icon" href="/images/coding.png" type="image/x-icon">
+
+
+
+
+
+ 
+
+<meta name="author" content="Néstor Martínez" />
+<meta name="description" content="Introducción En este caso de estudio tomaremos un data set de enfermedad renal crónica y mediante la utilización de RapidMiner, generaremos modelos capaces de predecir si una persona contraerá la enfermedad o no. CRISP-DM Para emplear la rama de Machine Learning nos basaremos en el modelo de CRISP-DM, siguiendo cada …" />
+<meta name="keywords" content="">
+
+
+  <meta property="og:site_name" content="Portafolio Machine Learning"/>
+  <meta property="og:title" content="Caso de Estudio Enfermedad Renal Crónica"/>
+  <meta property="og:description" content="Introducción En este caso de estudio tomaremos un data set de enfermedad renal crónica y mediante la utilización de RapidMiner, generaremos modelos capaces de predecir si una persona contraerá la enfermedad o no. CRISP-DM Para emplear la rama de Machine Learning nos basaremos en el modelo de CRISP-DM, siguiendo cada …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="/caso-de-estudio-enfermedad-renal-cronica.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2023-10-15 20:00:00-03:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="/author/nestor-martinez.html">
+  <meta property="article:section" content="Caso de Estudio"/>
+  <meta property="og:image" content="/images/Nestor.jpeg">
+
+  <title>Portafolio Machine Learning &ndash; Caso de Estudio Enfermedad Renal Crónica</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="/">
+      <img src="/images/Nestor.jpeg" alt="Néstor Martínez" title="Néstor Martínez">
+    </a>
+
+    <h1>
+      <a href="/">Néstor Martínez</a>
+    </h1>
+
+
+
+
+    <ul class="social">
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/néstor-martínez-759122232/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/noesnestor"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-envelope"
+rel="me"           href="mailto:nestor.marvi@gmail.com"
+           target="_blank">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="/">Home</a>
+
+  <a href="/archives">Historial</a>
+  <a href="/categories">Categorías</a>
+
+
+</nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="caso-de-estudio-enfermedad-renal-cronica">Caso de Estudio Enfermedad Renal Crónica</h1>
+    <p>
+      Posted on dom. 15 Octubre 2023 in <a href="/category/caso-de-estudio.html">Caso de Estudio</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <h1>Introducción</h1>
+<p>En este caso de estudio tomaremos un data set de enfermedad renal crónica y mediante la utilización de RapidMiner, generaremos modelos capaces de predecir si una persona contraerá la enfermedad o no.</p>
+<h1>CRISP-DM</h1>
+<p>Para emplear la rama de Machine Learning nos basaremos en el modelo de CRISP-DM, siguiendo cada uno de los pasos de este modelo para asegurarnos de un desarrollo óptimo de un modelo de predicción de machine learning.</p>
+<h2>Comprensión del negocio</h2>
+<p>La Enfermedad Renal Crónica (ERC) es, según Chavez (2014), "La pérdida de la función renal gradual y permanente en el transcurso de meses a años [...]". Esta enfermedad tiene lo que Chavez (2014) describe como cinco estadios, con cada estadio delimitado por la tasa de filtrado glomerular, o TFG. Cuanto mayor el estadio, menor la capacidad de filtrar que tienen los riñones, con el estadio 5 también conocido como falla renal, en la cual existe una pérdida significativa o total de la función renal. Debido a la naturaleza irreversible de los daños causados por esta enfermedad, es útil tener una forma de predecir si un paciente puede tener, en base a una serie de datos acerca de su estado de salud, un estadio temprano de ERC para cortar la enfermedad de raíz previo a que haga más daño.</p>
+<p>Según Chavez (2014), estos son las causas, los síntomas y los estudios realizables para detectar el ERC:</p>
+<h4>Causas</h4>
+<ol>
+<li>Diabetes</li>
+<li>Presión arterial alta</li>
+<li>Glomerulonefritis</li>
+<li>Enfermedad renal poliquística</li>
+</ol>
+<h4>Síntomas</h4>
+<ul>
+<li>perdida del apetito, nausea y vomito.</li>
+<li>Debilidad, fatiga y perdida e peso.</li>
+<li>Hinchazón (edema) en las piernas, manos, cara y alrededor de los ojos.</li>
+<li>Presión arterial alta, especialmente en edades tempranas o hipertensión severa e incontrolable.</li>
+<li>Palidez causada por anemia secundaria a una disminución en la producción de eritropoyetina por el riñón.</li>
+<li>Problemas para dormir, falta de concentración y mareos.</li>
+<li>Comezón , calambres o falta de descanso.</li>
+<li>Dolor en la espalda justo debajo de las costillas.</li>
+<li>Urgencia para pasar orina mas de lo ordinario, especialmente en la noche (nicturia)</li>
+<li>Dolor en los huesos y fracturas en adultos y retraso de crecimiento en niños por una disminución en la producción de forma activa de la vitamina D por el riñón.</li>
+<li>Disminución del interés sexual y disfunción eréctil en hombres y alteraciones menstruales en mujeres.</li>
+<li>Enfermedad renal esta ampliamente relacionada con un marcado incremento en las muertes cardiovasculares.</li>
+</ul>
+<h4>Estudios</h4>
+<ul>
+<li>Exámenes sanguíneos</li>
+<li>Evalúa la cantidad de hemoglobina en sangre</li>
+<li>Evalúa la cantidad de creatina sérica</li>
+<li>Evalúa la cantidad de urea</li>
+<li>Evalúa la cantidad de electrolitos en la sangre, de los cuales se encuentran:<ul>
+<li>sodio</li>
+<li>potasio</li>
+<li>magnesio</li>
+<li>bicarbonato</li>
+</ul>
+</li>
+<li>Evalúa la cantidad de glucosa en sangre</li>
+<li>Exámenes de orina</li>
+<li>Evalúa la cantidad de proteínas en la sangre, como la albumina</li>
+<li>Ultrasonido del riñón</li>
+<li>Otorga una visualización de los riñones, que permiten ver posibles piedras renales.</li>
+</ul>
+<p>Para hacer esto, haremos uso de <strong>machine learning</strong> para generar un modelo de predicción que en base a una serie de datos decida si una persona contrajo la enfermedad o no; de forma tal de que se le puedan hacer los tratamientos necesarios a tiempo. Este tipo de problemas a resolver por parte del modelo son conocidos como problemas de clasificación.</p>
+<h2>Comprensión de los datos</h2>
+<p>Para generar nuestro modelo de predicción tenemos a nuestra disposición un data set con 400 entradas, de las cuales 250 de las entradas contrajeron la enfermedad, y 150 de ellas no la contrajeron, con estos datos almacenados en la variable objetivo <code>class</code>. La forma de los datos, y los atributos que tiene el data set que utilizaremos para armar el modelo son:</p>
+<ol>
+<li>Age(numerical) 
+    age in years</li>
+<li>Blood Pressure(numerical) 
+    bp in mm/Hg</li>
+<li>Specific Gravity(nominal)
+    sg - (1.005,1.010,1.015,1.020,1.025)</li>
+<li>Albumin(nominal)
+    al - (0,1,2,3,4,5)</li>
+<li>Sugar(nominal)
+    su - (0,1,2,3,4,5)</li>
+<li>Red Blood Cells(nominal) 
+    rbc - (normal,abnormal)</li>
+<li>Pus Cell (nominal)
+    pc - (normal,abnormal)</li>
+<li>Pus Cell clumps(nominal)
+    pcc - (present,notpresent)</li>
+<li>Bacteria(nominal)
+    ba  - (present,notpresent)</li>
+<li>Blood Glucose Random(numerical)   <br>
+    bgr in mgs/dl</li>
+<li>Blood Urea(numerical) <br>
+    bu in mgs/dl</li>
+<li>Serum Creatinine(numerical)
+    sc in mgs/dl</li>
+<li>Sodium(numerical)
+    sod in mEq/L</li>
+<li>Potassium(numerical)  <br>
+    pot in mEq/L</li>
+<li>Hemoglobin(numerical)
+    hemo in gms</li>
+<li>Packed  Cell Volume(numerical)</li>
+<li>White Blood Cell Count(numerical)
+    wc in cells/cumm</li>
+<li>Red Blood Cell Count(numerical) 
+    rc in millions/cmm</li>
+<li>Hypertension(nominal) <br>
+    htn - (yes,no)</li>
+<li>Diabetes Mellitus(nominal)<br>
+    dm - (yes,no)</li>
+<li>Coronary Artery Disease(nominal) 
+    cad - (yes,no)</li>
+<li>Appetite(nominal) <br>
+    appet - (good,poor)</li>
+<li>Pedal Edema(nominal) 
+    pe - (yes,no)   </li>
+<li>Anemia(nominal) 
+    ane - (yes,no)</li>
+<li>Class (nominal, label)    <br>
+    class - (ckd,notckd)</li>
+</ol>
+<p>Como podemos ver, hay una multitud de datos dentro de nuestro data set. Dentro de estos datos podemos ver que hay datos que están directamente correlacionados entre sí, por lo cual hay una preparación de datos por realizar. </p>
+<h2>Preparación de los datos</h2>
+<h3>Importar datos</h3>
+<p>En este caso, utilizaremos la herramienta de RapidMiner para generar un modelo predictor. Para esto, accederemos al dataset existente en <a href="https://archive.ics.uci.edu/ml/datasets/Chronic_Kidney_Disease">UCI</a>. Una vez descargado, lo importaremos a RapidMiner. Una vez importado, lo más pertinente sería mirarlo para entender qué se importó:</p>
+<p><img alt="Pelican" src="/images/ckd/RawCKDAtributes.png"></p>
+<h4>Observaciones</h4>
+<ul>
+<li>Al descargarlo, vemos que todos los atributos se nos cargaron como nominales, por lo cual debemos de cambiar los valores de los atributos para que se reflejen con los tipos establecidos en la descripción de los datos. Además, existen algunos datos que no tienen sentido dentro del data set:</li>
+<li>El atributo "appet" (refiere a apetito), tiene un atributo "no". Se asume que refiere a poor, ya que "no" en apetito diría que no tiene apetito.</li>
+<li>El atributo "pe" (refiere a un Edema), tiene un atributo "good". Se asume que refiere a "no", ya que la enfermedad no puede estar bien, sino que la persona, por lo cual se cambiará a no.</li>
+<li>El atributo "class" tiene un atributo "no". Sabemos que existen 150 casos negativos y 250 casos positivos en el dataset. De estos 150, hay 149 en el formato apropiado. Además, existen 13 valores faltantes y 237 valores positivos, asumiremos que el "no" es de tipo "notckd" (refiere a que no cursa la enfermedad) y los 13 faltantes corresponden a personas que si cursan la enfermedad.</li>
+<li>Aunque parezca que hay pocos datos faltantes, en realidad estos datos quedaron como un posible tipo de dato categórico, representado con el signo de pregunta (?).</li>
+</ul>
+<h3>Modificación de los datos</h3>
+<p>Para esto, utilizaremos un poco de TurboPrep. Esta es una de las vistas disponibles en RapidMiner, que nos permite modificar con facilidad los datos que tenemos. Una vez entramos a la vista de TurboPrep, le declaramos que queremos cargar el .csv de ERC, y una vez cargado, esto es lo que vemos:</p>
+<p><img alt="Pelican" src="/images/ckd/TurboPrep1stLook.png"></p>
+<p>Como podemos ver, todos los atributos fueron detectados como categóricos por parte de RapidMiner. Esto no es correcto, ya que algunos de los datos que tenemos no deberían de ser numéricos. Para cambiarlo, haremos click en "Transform", lo cual nos dirigirá a una pantalla nueva. En esta pantalla, podemos hacer click en las columnas y en base a lo que clickeemos, los cambios que podemos hacerle. Como lo principal es hacer cambios de tipo, esto lo hacemos de esta forma:</p>
+<ol>
+<li>Seleccionamos la columna a la que cambiarle el tipo</li>
+<li>Seleccionamos el botón "CHANGE TYPE"</li>
+<li>Seleccionamos la opción "Change to number"</li>
+<li>Aplicamos los cambios</li>
+</ol>
+<p><img alt="Pelican" src="/images/ckd/TurboPrepChangeType.png"></p>
+<p>Esto lo seguimos haciendo hasta que los tipos que son categóricos que en realidad son numéricos hayan sido cambiados al tipo que les corresponde. Una vez terminado, le damos al botón "Commit Transformation", lo cual nos devuelve a la vista general de TurboPrep. Luego, tenemos opciones para aplicar estos cambios por fuera de TurboPrep. Podemos generar un proceso de cambios realizados o podemos exportar los datos, para guardarlos en un .csv que querramos, como podemos ver aquí:</p>
+<p><img alt="Pelican" src="/images/ckd/TurboPrepExporting.png"></p>
+<p>En mi caso, exportaré el proceso. Al exportar, la línea de diseño se verá llena de operadores que RapidMiner utiliza para hacer todos los cambios que hiciste al data set. En mi caso, me parece pertinente agruparlos todos en un subproceso llamado "Data Preparation", el cual contiene esto:</p>
+<p><img alt="Pelican" src="/images/ckd/DataPreparationStep1.png"></p>
+<p>Entrando más en detalle, dentro de los subprocesos tenemos:
+* Replace: Todos los signos de pregunta del data set se ven cambiados por un valor vacío que RapidMiner entiende que implica que son datos faltantes.
+* Subprocess: Agregado por TurboPrep, unifica los tipos de las columnas.
+* Replace Inconsistencies: Aquí hacemos los cambios detallados en las observaciones.
+* Numerical Parsing: Cambia todos los valores que no eran categóricos a su tipo correspondiente.
+* Agregar los ckd faltantes: Aquí hacemos un replace missing values específico a la variable objetivo "class".
+* Reorder attributes: Agregado por TurboPrep, asegura que el orden en el que las columnas estaban se mantiene.
+* Nominal to Binominal: Cambia todos los valores nominales a binomiales, según aquellos que solo tienen dos tipos posibles de atributos.
+* Set Role: Asignamos al atributo "class" el rol de la variable objetivo (label).</p>
+<h3>Selección de atributos</h3>
+<p>En base a las causas comúnes del ERC, los síntomas del ERC y los distintos factores utilizados para la detección del ERC, es que haremos una selección de los atributos utilizados. En base a estos factores, nos quedaremos con los siguientes atributos:</p>
+<ol>
+<li>Age(numerical) 
+    age in years</li>
+<li>Albumin(nominal)
+    al - (0,1,2,3,4,5)</li>
+<li>Appetite(nominal)  <br>
+    appet - (good,poor)</li>
+<li>Blood Glucose Random(numerical)    <br>
+    bgr in mgs/dl</li>
+<li>Blood Pressure(numerical) 
+    bp in mm/Hg</li>
+<li>Blood Urea(numerical)  <br>
+    bu in mgs/dl</li>
+<li>Class (nominal, label)     <br>
+    class - (ckd,notckd)</li>
+<li>Diabetes Mellitus(nominal) <br>
+    dm - (yes,no)</li>
+<li>Hemoglobin(numerical)
+    hemo in gms</li>
+<li>Hypertension(nominal) <br>
+    htn - (yes,no)</li>
+<li>Pedal Edema(nominal) 
+    pe - (yes,no)</li>
+<li>Potassium(numerical)  <br>
+    pot in mEq/L</li>
+<li>Serum Creatinine(numerical)
+    sc in mgs/dl</li>
+<li>Sodium(numerical)
+    sod in mEq/L</li>
+</ol>
+<h3>Datos faltantes</h3>
+<p>Ahora que modificamos los datos de forma tal de que RapidMiner nos pueda decir la cantidad de datos faltantes, encontramos que:</p>
+<p><img alt="Pelican" src="/images/ckd/MissingValues.png"></p>
+<p>Debido a la cantidad baja de datos, llenaré los datos faltantes con el promedio.</p>
+<h2>Modelado</h2>
+<p>Primero, generaremos modelos con estos algoritmos (todos tienen la misma seed local):
+* k-NN
+* Logistic Regression
+* Naive Bayes
+Estos algoritmos luego los evaluaremos mediante Cross Validation de 10 plegadas para conseguir el más performante de los tres, y una vez obtengamos el algoritmo, le aplicaremos a este algoritmo estos algoritmos de Feature Selection:
+* Forward Selection
+  * No hay límite de selecciones.
+  * Cero rondas especulativas.
+  * El algoritmo frena cuando no encuentra mejoras. 
+* Backward Elimination
+  * No hay límite de eliminaciones.
+  * Cero rondas especulativas.
+  * El algoritmo frena cuando no encuentra mejoras. 
+* Evolutionary Feature Selection 
+  * Esquema de selección de torneo.
+  * Tiene una población de veinte.
+  * Tiene un máximo de generaciones de treinta.
+Para aplicarlo en RapidMiner, utilizaremos el operador de Cross-Validation, y dentro del mismo colocaremos en el lado de training el algoritmo, y en el lado de testing el operador Apply Model conectado a un operador de Performance (Classification), cuyo output será el que utilizaremos para medir qué algoritmo es más performante. Esto se ve de esta forma (Cambiar el algoritmo de la sección de Training por el algoritmo deseado):
+<img alt="Pelican" src="/images/ckd/Example_k-NN.png"></p>
+<h3>Naive Bayes</h3>
+<p><img alt="Pelican" src="/images/ckd/NaiveBayes.png"></p>
+<h3>k-NN</h3>
+<p><img alt="Pelican" src="/images/ckd/k-NN.png"></p>
+<h3>Logistic Regression</h3>
+<p><img alt="Pelican" src="/images/ckd/LogisticRegression.png"></p>
+<p>En base a estos resultados, podemos declarar la regresión logística como el algoritmo más performante. En base a esto, copiaremos el operador Cross-Validation que hicimos anteriormente, y lo colocaremos dentro de cada elemento de Feature Selection (este es el ejemplo para Forward Selection, pero se aplica para el resto):
+<img alt="Pelican" src="/images/ckd/ForwardSelection.png"></p>
+<h3>Forward Selection</h3>
+<p><img alt="Pelican" src="/images/ckd/LogisticRegressionFS.png"></p>
+<h3>Backward Elimination</h3>
+<p><img alt="Pelican" src="/images/ckd/LogisticRegressionBE.png"></p>
+<h3>Evolutionary Feature Selection</h3>
+<p><img alt="Pelican" src="/images/ckd/LogisticRegressionEvo.png"></p>
+<h2>Conclusión</h2>
+<p>En base a un data set con 400 entradas, logramos conseguir un modelo con performance que parece ser demasiado buena para ser cierta. Esto puede pasar debido a que la cantidad de datos que hay no es muy alta, y por ende puede que el modelo se sobreaplique al data set.
+Posteriormente, lo que quedaría es recabar más información e intentar testear el modelo generado con esos datos, para entender si realmente funciona o no, y en base a los resultados evaluar si hacer un Deploy del mismo o no.</p>
+<h2>Bibliografía</h2>
+<p>García, G., et al. (2014). Cuide su riñón  (1.ª ed.). Grupo editorial: Editorial Universidad de Guadalajara.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy;  </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Portafolio Machine Learning ",
+  "url" : "",
+  "image": "/images/Nestor.jpeg",
+  "description": ""
+}
+</script>
+</body>
+</html>
