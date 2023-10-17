@@ -312,22 +312,22 @@ Los datos no están lo suficientemente equilibrados como para que podamos sacar 
 </ul>
 </li>
 </ul>
-<p>Para aplicarlo en RapidMiner, utilizaremos el operador de Cross-Validation, y dentro del mismo colocaremos en el lado de training el algoritmo, y en el lado de testing el operador Apply Model conectado a un operador de Performance (Classification), cuyo output será el que utilizaremos para medir qué algoritmo es más performante. Esto se ve de esta forma (Cambiar el algoritmo de la sección de Training por el algoritmo deseado):
-<img alt="Pelican" src="/images/ckd/Example_k-NN.png"></p>
+<p>Para aplicarlo en RapidMiner, utilizaremos el operador de Cross-Validation, y dentro del mismo colocaremos en el lado de training el algoritmo, y en el lado de testing el operador Apply Model conectado a un operador de Performance (Classification), cuyo output será el que utilizaremos para medir qué algoritmo es más performante. Esto se ve de esta forma (Cambiar el algoritmo de la sección de Training por el algoritmo deseado):</p>
+<p><img alt="Pelican" src="/images/animals//Example_k-NN.png"></p>
 <h3>Naive Bayes</h3>
-<p><img alt="Pelican" src="/images/ckd/NaiveBayes.png"></p>
+<p><img alt="Pelican" src="/images/animals/NaiveBayes.png"></p>
 <h3>k-NN</h3>
-<p><img alt="Pelican" src="/images/ckd/k-NN.png"></p>
+<p><img alt="Pelican" src="/images/animals/k-NN.png"></p>
 <h3>Logistic Regression</h3>
-<p><img alt="Pelican" src="/images/ckd/LogisticRegression.png">
-En base a estos resultados, podemos declarar la regresión logística como el algoritmo más performante. En base a esto, copiaremos el operador Cross-Validation que hicimos anteriormente, y lo colocaremos dentro de cada elemento de Feature Selection (este es el ejemplo para Forward Selection, pero se aplica para el resto):
-<img alt="Pelican" src="/images/ckd/ForwardSelection.png"></p>
+<p><img alt="Pelican" src="/images/animals/LogisticRegression.png">
+En base a estos resultados, podemos declarar la regresión logística como el algoritmo más performante. En base a esto, copiaremos el operador Cross-Validation que hicimos anteriormente, y lo colocaremos dentro de cada elemento de Feature Selection (este es el ejemplo para Forward Selection, pero se aplica para el resto):</p>
+<p><img alt="Pelican" src="/images/animals/ForwardSelection.png"></p>
 <h3>Forward Selection</h3>
-<p><img alt="Pelican" src="/images/ckd/LogisticRegressionFS.png"></p>
+<p><img alt="Pelican" src="/images/animals/LogisticRegressionFS.png"></p>
 <h3>Backward Elimination</h3>
-<p><img alt="Pelican" src="/images/ckd/LogisticRegressionBE.png"></p>
+<p><img alt="Pelican" src="/images/animals/LogisticRegressionBE.png"></p>
 <h3>Evolutionary Feature Selection</h3>
-<p><img alt="Pelican" src="/images/ckd/LogisticRegressionEvo.png"></p>
+<p><img alt="Pelican" src="/images/animals/LogisticRegressionEvo.png"></p>
 <h2>Conclusión</h2>
 <p>En base a dos data sets con diez mil entradas cada uno, hicimos operaciones tales de discernir con una efectividad de alrededor de un 70% la capacidad de que un animal sea adoptado o no. Teniendo en cuenta que el data set de Outcomes está constantemente actualizándose, sería una buena tarea futura utilizar estos nuevos datos e intentar predecir en base a nuestro modelo ya generado.
 También me gustaría utilizar un Feature Selection Evolutivo con mayor cantidad de población y generaciones, pero existe una limitación en los componentes de mi computadora que lo hace simplemente demasiado para que pueda procesar; por esto los números son tan bajos.</p>
