@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+<html lang="spanish">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="/theme/pygments/github.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+
+
+  <link rel="shortcut icon" href="/images/coding.png" type="image/x-icon">
+  <link rel="icon" href="/images/coding.png" type="image/x-icon">
+
+
+
+
+
+ 
+
+<meta name="author" content="Néstor Martínez" />
+<meta name="description" content="Introducción En este caso de estudio tomaremos un data set del Refugio de Animales de Austin y mediante la utilización de RapidMiner, generaremos modelos capaces de predecir si un animal será adoptado o no. CRISP-DM Para emplear la rama de Machine Learning nos basaremos en el modelo de CRISP-DM, siguiendo …" />
+<meta name="keywords" content="">
+
+
+  <meta property="og:site_name" content="Portafolio Machine Learning"/>
+  <meta property="og:title" content="Caso de Estudio Adopción de Animales"/>
+  <meta property="og:description" content="Introducción En este caso de estudio tomaremos un data set del Refugio de Animales de Austin y mediante la utilización de RapidMiner, generaremos modelos capaces de predecir si un animal será adoptado o no. CRISP-DM Para emplear la rama de Machine Learning nos basaremos en el modelo de CRISP-DM, siguiendo …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="/caso-de-estudio-adopcion-de-animales.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2023-10-16 18:00:00-03:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="/author/nestor-martinez.html">
+  <meta property="article:section" content="Caso de Estudio"/>
+  <meta property="og:image" content="/images/Nestor.jpeg">
+
+  <title>Portafolio Machine Learning &ndash; Caso de Estudio Adopción de Animales</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="/">
+      <img src="/images/Nestor.jpeg" alt="Néstor Martínez" title="Néstor Martínez">
+    </a>
+
+    <h1>
+      <a href="/">Néstor Martínez</a>
+    </h1>
+
+
+
+
+    <ul class="social">
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/néstor-martínez-759122232/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/noesnestor"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-envelope"
+rel="me"           href="mailto:nestor.marvi@gmail.com"
+           target="_blank">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="/">Home</a>
+
+  <a href="/archives">Historial</a>
+  <a href="/categories">Categorías</a>
+
+
+</nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="caso-de-estudio-adopcion-de-animales">Caso de Estudio Adopción de Animales</h1>
+    <p>
+      Posted on lun. 16 Octubre 2023 in <a href="/category/caso-de-estudio.html">Caso de Estudio</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <h1>Introducción</h1>
+<p>En este caso de estudio tomaremos un data set del Refugio de Animales de Austin y mediante la utilización de RapidMiner, generaremos modelos capaces de predecir si un animal será adoptado o no.</p>
+<h1>CRISP-DM</h1>
+<p>Para emplear la rama de Machine Learning nos basaremos en el modelo de CRISP-DM, siguiendo cada uno de los pasos de este modelo para asegurarnos de un desarrollo óptimo de un modelo de predicción de machine learning.</p>
+<h2>Comprensión del negocio</h2>
+<p>Basándonos en la página oficial del Centro de Animales de Austin (2020), este centro es el refugio municipal de la ciudad de Austin, Texas, que provee refugio a miles de animales anualmente, conjunto con servicios de protección animal y servicios de recursos para mascotas. Además, tienen como misión el proporcionar nuevos hogares a al menos el 95% de los animales protegidos por ellos.</p>
+<p>La página de <a href="https://www.kaggle.com/datasets/aaronschlegel/austin-animal-center-shelter-intakes-and-outcomes/data">Kaggle</a>, donde este data set está subido, menciona que el Centro de Animales de Austin es el mayor centro con políticas en contra de la eutanasia para animales saludables, obteniendo un total de dieciocho mil animales por año, al momento de la escritura del Kaggle, en 2018. Ellos tienen una iniciativa que permite el acceso a los datos acumulados en base a la <a href="https://data.austintexas.gov">Iniciativa de datos abiertos de la ciudad de Austin</a>. En particular, los datos recabados son de octubre de 2013 hasta abril de 2017. El data set de kaggle tiene ochenta mil datos por data set (tiene un data set de animales que entraron y un data set de animales que salieron), mientras que los datos que manejamos son una fracción de este valor, teniendo a nuestra disposición diez mil entradas en cada data set.</p>
+<p>Nuestro objetivo es predecir si un animal será adoptado de este centro o no, basándonos en un perfil del mismo. En este caso, la función del modelo predictor es de tomar datos que no tenemos conocimiento de si serán adoptados o no, y en base a estos datos, deberá clasificarlos entre que serán adoptados o no. A este tipo de problemas se los conocen como <strong>problemas de clasificación</strong>.</p>
+<h2>Comprensión de los datos</h2>
+<p>En este caso, tenemos dos data sets, un data set de animales tomados por el centro y un data set de lo que aconteció con esos animales, si es que algo aconteció. A estos data sets se los conoce como austin_animal_center_intakes y austin_animal_center_outcomes, a los cuales referiremos como "intakes" y "outcomes", respectivamente.</p>
+<h3>Intakes</h3>
+<p>El data set de intakes tiene estos datos:</p>
+<ol>
+<li>age_upon_intake (nominal)
+    La edad del animal cuando entró al centro de Austin. Varía entre los días, semanas, meses hasta años.</li>
+<li>animal_id (nominal)
+    Identificador del animal otorgado por el centro de animales de Austin.</li>
+<li>animal_type (nominal)
+    Tipo de animal que entró al centro. Los valores más comúnes son los perros y los gatos, pero también se hace mención de otros tipos de animales, especificando a la hora de hablar de aves y animales de ganado.</li>
+<li>breed (nominal)
+    La raza del animal</li>
+<li>color (nominal)
+    El color del animal</li>
+<li>datetime (date_time)
+    La fecha y la hora en la cual el animal fue ingresado</li>
+<li>monthyear (date_time)
+    El mes y el año en la cual el animal fue ingresado</li>
+<li>found_location (nominal)
+    La localización en la cual el animal fue encontrado, ya sea una calle o un área general como la ciudad de Austin.</li>
+<li>intake_condition (nominal: Normal, Injured, Aged, Sick, Other, Feral, Pregnant, Nursing)
+    Condición en la cual el animal entró al centro de animales.</li>
+<li>intake_type (nominal: Public Assist, Owner Surrender, Stray, Euthanasia Request, Wildlife)
+    Tipo de ingreso categorizado.</li>
+<li>name (nominal)
+    El nombre del animal.</li>
+<li>sex_upon_intake (nominal: Intact Male, Intact Female, Neutered Male, Spayed Female)
+    Denota si el animal es macho o hembra y si está castrado o no.</li>
+</ol>
+<h3>Outcomes</h3>
+<p>El data set de outcomes tiene estos datos:</p>
+<ol>
+<li>age_upon_outcome (nominal)
+    La edad del animal cuando salió del centro de Austin. Varía entre los días, semanas, meses hasta años.</li>
+<li>animal_id (nominal)
+    Identificador del animal otorgado por el centro de animales de Austin.</li>
+<li>animal_type (nominal)
+    Tipo de animal que entró al centro. Los valores más comúnes son los perros y los gatos, pero también se hace mención de otros tipos de animales, especificando a la hora de hablar de aves y animales de ganado.</li>
+<li>breed (nominal)
+    La raza del animal</li>
+<li>color (nominal)
+    El color del animal</li>
+<li>datetime (date_time)
+    La fecha y la hora en la cual el animal fue ingresado</li>
+<li>monthyear (date_time)
+    El mes y el año en la cual el animal fue ingresado</li>
+<li>date_of_birth (date)
+    Día de nacimiento del animal, puede ser literal o estimada.</li>
+<li>outcome_subtype (nominal)
+    Descripción más específica de la conclusión que el animal tuvo en el centro de animales.</li>
+<li>outcome_type (nominal: Return to Owner, Transfer, Adoption, Euthanasia, Died, Missing, Rto-Adopt, Relocate, Disposal)
+    Categorización del tipo de conclusión que el animal tuvo en el centro de animales.</li>
+<li>name (nominal)
+    El nombre del animal.</li>
+<li>sex_upon_outcome (nominal: Intact Male, Intact Female, Neutered Male, Spayed Female)
+    Denota si el animal es macho o hembra y si está castrado o no.</li>
+</ol>
+<h3>Observaciones</h3>
+<p>Si miramos ambos data sets, existen únicamente tres atributos que tienen valores nulos:</p>
+<ol>
+<li>El atributo "name", que tiene 1563 desconocidos en Outcomes y 1724 en Intakes.</li>
+<li>El atributo "outcome_type", que tiene solo un valor faltante</li>
+<li>El atributo "outcome_subtype", lo cual se debe a que este valor está hecho para explicar con más detalle qué le sucedió al animal, por lo cual tiene sentido que en partes donde no se requiera mayor explicación (por ejemplo, que el animal murió), que no hayan valores en el subtipo.</li>
+</ol>
+<h2>Preparación de los datos</h2>
+<h3>Importar datos</h3>
+<p>En este caso, utilizaremos la herramienta de RapidMiner para generar un modelo predictor. En el caso de que se quiera acceder a un data set público, está el de <a href="https://www.kaggle.com/datasets/aaronschlegel/austin-animal-center-shelter-intakes-and-outcomes/data">Kaggle</a>, pero si uno quiere datos actualizados, podemos sacar los data set de <a href="https://data.austintexas.gov/Health-and-Community-Services/Austin-Animal-Center-Intakes/wter-evkm">Intake</a> y <a href="https://data.austintexas.gov/Health-and-Community-Services/Austin-Animal-Center-Outcomes/9t4d-g238">Outcome</a> de la página oficial del gobierno de Austin, Texas.</p>
+<p>En nuestro caso, utilizaremos una versión modificada del data set que se muestra en Kaggle. Esto es porque los data set que se están utilizando tienen una cantidad de atributos abismal, y con los recursos que tengo a mi disposición, simplemente no es viable intentar generar un modelo con tanta información. Como mencioné anteriormente, estos data set tienen cada uno un total de diez mil atributos, lo cual sigue siendo bastante, pero no se compara con los ochenta mil que tiene cada uno de los data set de Kaggle, o los ciento cincuenta mil que tiene cada data set descargable por la página oficial.</p>
+<h3>Selección de atributos</h3>
+<p>Queremos predecir si un animal será adoptado o no. Por ende, hay ciertos valores que al visualizarlos simplemente no parecen relevantes. Por ejemplo, un atributo como el nombre, que aparte de que tiene una gran cantidad de atributos faltantes en ambos datasets (probablemente porque el animal podría haber sido ingresado sin un nombre, y terminado sin uno también). Al final del día, el dueño es libre de colocarle el nombre que quiera al animal, ya que es su dueño. Por ende, me parece que lo más pertinente sería dejar de lado este atributo.</p>
+<p>Otro atributo que dejo de lado es el atributo de "monthyear". Esto se debe a que los valores que almacena son exáctamente iguales a los de "datetime", y por ende no necesito dos atributos que digan lo mismo. Debido a que "datetime" describe mejor lo que se almacena, me quedaré con "datetime".</p>
+<p>Uno de los atributos que me parece interesante son los atributos de "sex_upon_intake" y "sex_upon_outcome". Cuando uno lo lee, parece raro, ¿no?. ¿El sexo del animal cambia con el tiempo? En realidad es para referirse a la posibilidad de que un animal que entre intacto al centro de animales pueda terminar siendo castrado. Esto se debe a que el atributo no solo almacena el sexo del animal, sino que también almacena si el animal esta castrado o no, con "Neutered" para machos y "Spayed" para hembras (en el caso de que no esten castrados, dice "Intact") Si realmente quisiésemos reflejar la posibilidad de que el animal sea castrado, me parece que sería preferible si hacemos que el sexo sea su propio atributo, y luego tenemos otros atributo que permite ver si está castrado o no.</p>
+<p>Por último, no olvidemos que lo que queremos predecir es si un animal será adoptado o no. Para esto, debemos de ir a la tabla de Outcomes y hacer un atributo nuevo, al cual definiremos como nuestra variable objetivo "adopted", la cual verificará si el animal fue adoptado y la adopción deberá excluir adopciones a otras casas de adopción de animales, ya que al final del día lo que queremos es saber qué condiciones hacen que un animal salga de una casa de adopción, y una adopción a otra casa de animales los mantiene dentro del sistema de casas de adopción.</p>
+<p>Por ende, nuestros atributos serán:</p>
+<ol>
+<li>age_upon_intake (nominal)
+    La edad del animal cuando entró al centro de Austin. Varía entre los días, semanas, meses hasta años.</li>
+<li>animal_id (nominal, id)
+    Identificador del animal otorgado por el centro de animales de Austin.</li>
+<li>animal_type (nominal)
+    Tipo de animal que entró al centro. Los valores más comúnes son los perros y los gatos, pero también se hace mención de otros tipos de animales, especificando a la hora de hablar de aves y animales de ganado.</li>
+<li>breed (nominal)
+    La raza del animal</li>
+<li>color (nominal)
+    El color del animal</li>
+<li>datetime (date_time)
+    La fecha y la hora en la cual el animal fue ingresado</li>
+<li>intake_condition (nominal: Normal, Injured, Aged, Sick, Other, Feral, Pregnant, Nursing)
+    Condición en la cual el animal entró al centro de animales.</li>
+<li>intake_type (nominal: Public Assist, Owner Surrender, Stray, Euthanasia Request, Wildlife)
+    Tipo de ingreso categorizado.</li>
+<li>neutered (binomial: Neutered, Intact)
+    describe si el animal fue castrado (Neutered) o no (Intact).</li>
+<li>sex (binomial: Male, Female)
+    describe el sexo del animal</li>
+<li>adopted (binomial: true, false)
+    describe si el animal fue adoptado por una entidad distinta de una casa de adopción o no.</li>
+</ol>
+<h3>Modificación de los datos</h3>
+<p>Debido a la cantidad de cambios que vamos a realizar, utilizaremos la herramienta de TurboPrep para ayudarnos con esta tarea. Tendremos que hacer muchos cambios, como la eliminación de atributos, la separación de atributos en dos partes, y la generación de un atributo nuevo (nuestra variable objetivo).</p>
+<p>Para dirigirnos a TurboPrep, lo primero que debemos hacer es ir a la sección de vistas en RapidMiner y seleccionar "TurboPrep". Una vez ahí dentro, cargaremos nuestros data sets de Intake y Outcome, utilizando la herramienta "LOAD DATA", y una vez cargados, podemos empezar a trabajar. Recomiendo empezar con el data set de Intake, ya que este data set será al que le agreguemos la variable objetivo.</p>
+<p><img alt="Pelican" src="/images/animals/TurboPrepView.png"></p>
+<h4>Eliminación de atributos</h4>
+<p>Para eliminar un atributo, primero debemos de dirigirnos a la sección de Transform y luego nos mostrará en la pantalla las distintas funcionalidades que TurboPrep trae para modificar data sets. Para eliminar un atributo, hacemos click en el y se coloreará de naranja. Una vez hecho esto, nos dirigimos a la sección de la izquierda y tocamos el botón "REMOVE". Se nos abrirá un botón para confirmar nuestra acción, la cual confirmaremos. </p>
+<p><img alt="Pelican" src="/images/animals/EliminarAtributo.png"></p>
+<p>Posteriormente podemos seguir eliminando atributos si seguimos estos pasos (nuestro data set no tiene monthyear).</p>
+<h4>Separación de atributos</h4>
+<p>Para separar un atributo, dentro de la sección de "Transform", haremos click en el atributo que queremos separar "sex_upon_intake" y luego utilizaremos la función "SPLIT". Para esto, seleccionaremos un atributo, hasta que se coloree naranja. Una vez vemos que se selecciona correctamente, nos dirigiremos a la función "SPLIT". Como la estructura de los datos es: {Neutered/Spayed/Intact} {Male/Female}, utilizaremos un espacio para indicar en base a qué se debería de dividir los atributos. Una vez hecho esto, damos confirmar.</p>
+<p><img alt="Pelican" src="/images/animals/SepararAtributos.png"></p>
+<p>Al separar, se nos generarán dos atributos con el mismo nombre. Recomiendo cambiarles el nombre utilizando el operador RENAME.</p>
+<p><img alt="Pelican" src="/images/animals/RenombrarAtributo.png"></p>
+<h4>Cambiar tipo de un atributo</h4>
+<p>En el caso de los atributos datetime, están en un formato irreconocible para RapidMiner. Esto lo debemos de arreglar al cambiarles el tipo. Para esto, seleccionaremos el atributo "datetime" (que es el atributo al que le queremos cambiar el tipo) y una vez seleccionado iremos a la sección de "CHANGE TYPE". Dentro de la misma, cambiaremos el "Change to number" a "Change to date" y luego cambiaremos el valor de "date" a "date and time". Para hacer el cambio, RapidMiner requiere que le pasemos el formato en el cual el dato esta previamente almacenado, y así puede cambiarlo correctamente. Para esto, le pasaremos esto: <code>yyyy-MM-dd'T'HH:mm:ss</code>; que es la forma en la cual el dato está escrito. Una vez hecho todo esto, podemos confirmar la operación.</p>
+<p><img alt="Pelican" src="/images/animals/CambiarTipoAtributo.png"></p>
+<h4>Confirmar cambios</h4>
+<p>Ahora queremos generar la variable objetivo que uniremos con nuestro data set de entrada para poder generar un modelo predictivo. Para esto, debemos de confirmar nuestros cambios en el data set de Intake. Simplemente nos dirigiremos a la sección de arriba y daremos click en la sección de "COMMIT TRANSFORMATIONS".</p>
+<p><img alt="Pelican" src="/images/animals/ConfirmarCambios.png"></p>
+<p>Una vez confirmados, volveremos a la primera pantalla, y tendremos la libertad de elegir el data set que querramos modificar. Ahora que ya hicimos todos los cambios necesarios en el data set de Intakes, iremos al data set de Outcomes.</p>
+<h4>Generación de nuevos atributos</h4>
+<h5>Proceso preliminar</h5>
+<p>Aparte de tener que realizar todos los cambios realizados en el data set de Intakes, debemos de borrar atributos que no utilizaremos a futuro. Estos atributos son aquellos que, a la hora de unir ambas tablas (porque esa es la forma con la cual tomaremos el data set de Intakes y mapearemos cada animal_ID correspondiente de forma tal de que los datos tengan la variable objetivo correspondiente). Dentro de los cuales, mencionaría:</p>
+<ul>
+<li>sex_upon_outcome</li>
+<li>date_of_birth</li>
+</ul>
+<p>Estos atributos los eliminaremos conjunto con los que ya eliminamos anteriormente en Intakes (como ya mencioné, hay que hacer todos los cambios que hicimos en Intakes). Una vez hecho esto, confirmaremos nuestros cambios de la misma forma que hicimos en el otro data set.</p>
+<h5>Generación de nuevo atributo</h5>
+<p>Una vez hecho todo esto, podemos proseguir. Para hacer esto, nos dirigiremos a nuestro data set de Outcomes, y haremos click en la sección de "GENERATE". Aquí nos abrirá una nueva pestaña la cual nos muestra unos atributos a llenar. Dentro de los cuales, tenemos el nombre y la fórmula utilizada para generar el nuevo atributo. En nuestro caso, nuestra variable objetivo será llamada adopted (ya que es lo que queremos evaluar). Es un <code>boolean</code>, y si un animal es adoptado y no fue adoptado a otra casa de animales, el valor que tendrá la entrada es <code>true</code>. Esta es la fórmula: <code>[outcome_type]=="Adoption"&amp;&amp;[outcome_subtype]!="Foster"</code>. Una vez puesta la fórmula, daremos click en "UPDATE PREVIEW", y luego nos mostrará como se generarían las tablas. Finalmente, daremos click en "COMMIT GENERATE".</p>
+<p><img alt="Pelican" src="/images/animals/GenerarAtributo.png"></p>
+<h4>Unión de data sets</h4>
+<p>Una vez confirmada la creación de nuestro nuevo atributo, debemos de unirlo al data set de Intakes, para tener nuestra variable objetivo ahí dentro. Para esto, volveremos al data set de Intakes y haremos click en "MERGE". Se nos mostrará una nueva pantalla en la cual debemos de configurar la forma en la cual se unirán los data sets. Haremos un Left Join ya que lo que más nos importa es que se mantengan los datos de nuestro data set de Intakes, y luego agregaremos sobre estos la variable objetivo para todos los atributos que tengan un correspondiente. El resto los filtraremos después en nuestro flujo de trabajo con el operador Filter Attributes.</p>
+<p>Una vez esté configurado correctamente, actualizamos la vista previa y confirmamos nuestro merge con click en "COMMIT MERGE". Para referencia dejo cómo se veía mi configuración:</p>
+<p><img alt="Pelican" src="/images/animals/UnirDataSets.png"></p>
+<h3>Datos Faltantes</h3>
+<p>Ahora que mergeamos dos data sets, podemos ver que no todos los elementos en el data set de Intakes tienen su correspondiente en el data set de Outcomes. A la hora del entrenamiento del modelo, simplemente debemos de removerlos del flujo, pero podemos utilzarlos posteriormente para testeo.</p>
+<p><img alt="Pelican" src="/images/animals/FilterExamples.png"></p>
+<p>Se agregó "neutered" ya que al evaluar si quedaban datos faltantes con ese filtro encontré esto:</p>
+<p><img alt="Pelican" src="/images/animals/MissingValues.png"></p>
+<p>Por ende, me pareció pertinente eliminarlos.</p>
+<h3>Visualización de los datos</h3>
+<h4>Tipos de animales</h4>
+<p>A nosotros lo que más nos interesa es saber qué es realmente relevante a la hora de que un animal sea adoptado. Para esto, veremos algunas variables y cómo se conectan con la variable objetivo de adopción.
+<img alt="Pelican" src="/images/animals/TiposDeAnimalesYEdadAdopcion.png">
+No hay suficientes valores para representar animales como aves y animales rurales, ya que solo tienen una entrada y en esa entrada no fueron adoptados, lo cual puede que a la hora de otorgarle al algoritmo aves o animales rurales, simplemente los descarte como que no serán adoptados. Esta es una limitación de nuestro data set, y por ende quizas querramos remitirnos a evaluaciones de los otros tres tipos (Perro, Gato y ¿Otros?, estaría bueno saber qué entra en ese conjunto...).</p>
+<p>Tampoco podemos discernir mucho acerca de qué animal es más adoptado, ya que dentro de lo que cabe las entradas están muy desbalanceadas. En el data set hay demasiados perros en comparación con los gatos, que son el segundo tipo de animal que más se encuentra en el data set:</p>
+<p><img alt="Pelican" src="/images/animals/TiposDeAnimalesYEdadAdopcion.png"></p>
+<h4>Condicion del animal</h4>
+<p>También estaría bueno saber si influye la condición en la que el animal es entregado al centro con la posibilidad de que sean adoptados o no. Para esto, haremos un gráfico de barras que muestre del 100% de los tipos de entrega, cuál es el porcentaje de adopción.
+<img alt="Pelican" src="/images/animals/CondicionDeEntregaDeAnimal.png">
+La condición de adopción parece tener una influencia en la probabilidad de ser adoptado, aunque no tanto ya que de todos los animales adoptados, los que están en las mejores condiciones tienen el 32% de adopción. Pero esta probabilidad disminuye con los animales heridos. Cabe destacar que la cantidad de animales que están en estas condiciones también disminuye significativamente, como lo muestra esta barra:
+<img alt="Pelican" src="/images/animals/CondicionDeEntregaDeAnimal2.png">
+Los datos no están lo suficientemente equilibrados como para que podamos sacar conclusiones significativas de los mismos.</p>
+<h2>Modelado</h2>
+<p>Primero, generaremos modelos con estos algoritmos (todos tienen la misma seed local):</p>
+<ul>
+<li>k-NN</li>
+<li>Logistic Regression</li>
+<li>Naive Bayes</li>
+</ul>
+<p>Estos algoritmos luego los evaluaremos mediante Cross Validation de 10 plegadas para conseguir el más performante de los tres, y una vez obtengamos el algoritmo, le aplicaremos a este algoritmo estos algoritmos de Feature Selection:</p>
+<ul>
+<li>
+<p>Forward Selection</p>
+<ul>
+<li>No hay límite de selecciones.</li>
+<li>Cero rondas especulativas.</li>
+<li>El algoritmo frena cuando no encuentra mejoras. </li>
+</ul>
+</li>
+<li>
+<p>Backward Elimination</p>
+<ul>
+<li>No hay límite de eliminaciones.</li>
+<li>Cero rondas especulativas.</li>
+<li>El algoritmo frena cuando no encuentra mejoras. </li>
+</ul>
+</li>
+<li>
+<p>Evolutionary Feature Selection </p>
+<ul>
+<li>Esquema de selección de torneo.</li>
+<li>Tiene una población de cinco.</li>
+<li>Tiene un máximo de generaciones de diez.</li>
+</ul>
+</li>
+</ul>
+<p>Para aplicarlo en RapidMiner, utilizaremos el operador de Cross-Validation, y dentro del mismo colocaremos en el lado de training el algoritmo, y en el lado de testing el operador Apply Model conectado a un operador de Performance (Classification), cuyo output será el que utilizaremos para medir qué algoritmo es más performante. Esto se ve de esta forma (Cambiar el algoritmo de la sección de Training por el algoritmo deseado):
+<img alt="Pelican" src="/images/ckd/Example_k-NN.png"></p>
+<h3>Naive Bayes</h3>
+<p><img alt="Pelican" src="/images/ckd/NaiveBayes.png"></p>
+<h3>k-NN</h3>
+<p><img alt="Pelican" src="/images/ckd/k-NN.png"></p>
+<h3>Logistic Regression</h3>
+<p><img alt="Pelican" src="/images/ckd/LogisticRegression.png">
+En base a estos resultados, podemos declarar la regresión logística como el algoritmo más performante. En base a esto, copiaremos el operador Cross-Validation que hicimos anteriormente, y lo colocaremos dentro de cada elemento de Feature Selection (este es el ejemplo para Forward Selection, pero se aplica para el resto):
+<img alt="Pelican" src="/images/ckd/ForwardSelection.png"></p>
+<h3>Forward Selection</h3>
+<p><img alt="Pelican" src="/images/ckd/LogisticRegressionFS.png"></p>
+<h3>Backward Elimination</h3>
+<p><img alt="Pelican" src="/images/ckd/LogisticRegressionBE.png"></p>
+<h3>Evolutionary Feature Selection</h3>
+<p><img alt="Pelican" src="/images/ckd/LogisticRegressionEvo.png"></p>
+<h2>Conclusión</h2>
+<p>En base a dos data sets con diez mil entradas cada uno, hicimos operaciones tales de discernir con una efectividad de alrededor de un 70% la capacidad de que un animal sea adoptado o no. Teniendo en cuenta que el data set de Outcomes está constantemente actualizándose, sería una buena tarea futura utilizar estos nuevos datos e intentar predecir en base a nuestro modelo ya generado.
+También me gustaría utilizar un Feature Selection Evolutivo con mayor cantidad de población y generaciones, pero existe una limitación en los componentes de mi computadora que lo hace simplemente demasiado para que pueda procesar; por esto los números son tan bajos.</p>
+<h2>Biblografía</h2>
+<p>About the Austin Animal Center. AustinTexas.gov. (2020). https://www.austintexas.gov/department/about-austin-animal-center </p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy;  </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Portafolio Machine Learning ",
+  "url" : "",
+  "image": "/images/Nestor.jpeg",
+  "description": ""
+}
+</script>
+</body>
+</html>
